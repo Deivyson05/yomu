@@ -1,0 +1,136 @@
+/* Container geral simulando celular */
+.profile-container {
+  max-width: 380px;   /* largura de celular */
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.step {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Avatar */
+.avatar-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avatar-preview {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 10px;
+  border: 2px dashed #bbb;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar-placeholder {
+  font-size: 2rem;
+  color: #666;
+}
+
+.avatar-selected {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Avatares de escolha */
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatar-circle:hover {
+  background: #ddd;
+}
+
+.avatar-circle.selected {
+  border: 2px solid #4a90e2;
+  background: #cce0ff;
+}
+
+/* Formulário */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-form label {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.profile-form input,
+.profile-form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+/* Botão */
+.finalizar-btn {
+  margin-top: 20px;
+  padding: 12px;
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.finalizar-btn:hover {
+  background: #444;
+}
+
+/* Responsividade */
+@media (max-width: 420px) {
+  .profile-container {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
