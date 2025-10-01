@@ -5,7 +5,7 @@ import { getSessionData, setSessionData } from "./core/sStorage";
 import { getData } from "./core/lStorage";
 
 const api = axios.create({
-    baseURL: 'http://urldaapi:3000/'
+    baseURL: 'http://localhost:3001/'
 });
 
 export const cadUsuario = async (data: any) => {
@@ -23,6 +23,16 @@ export const postLogin = async (data: any) => {
     try {
         const response = await api.post('user/login', data);
         setSessionData('token', response.data.token);
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const getPerfil = async () => {
+    try {
+        const response = await api.get(`user/${getSessionData('token')}`);
+        return response.data;
     } catch (error) {
         console.error(error);
         throw error;
