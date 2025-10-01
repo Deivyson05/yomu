@@ -85,6 +85,36 @@ class UserController {
             user.release();
         }
     }
+
+    static getUser: RequestHandler = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        if (!id) {
+            res.sendStatus(400);
+        }
+
+        const user = await db();
+
+        try {
+            const result = await user.query(`
+                SELECT * FROM Usuarios WHERE user_token = $1
+            `, [id]);
+
+            if (result.rows.length === 0) {
+                res.sendStatus(401);
+                return;
+            }
+
+            res.status(200).json({
+                nome: result.rows[0].nome,
+                email: result.rows[0].email
+            });
+        } catch (error) {
+            console.log(error);
+            res.sendStatus(500);
+        } finally {
+            user.release();
+        }
+    }
 }
 
 export default UserController;

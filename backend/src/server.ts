@@ -7,12 +7,12 @@ const app: express.Application = express();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.use(router);
 
 db();
 
 app.listen(port, () => {
-    console.log('Server is running in http://localhost:3000');
+    console.log('Server is running in http://localhost:3001');
 });
