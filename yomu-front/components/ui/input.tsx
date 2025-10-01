@@ -23,7 +23,7 @@ function Input({ className, type, name, ...props }: React.ComponentProps<"input"
   
   return (
     <div className="flex h-14 rounded-md overflow-hidden shadow-sm">
-      <div className="h-full w-14 flex items-center justify-center bg-primary text-white text-center">
+      <div className="h-full w-16 flex items-center justify-center bg-primary text-white text-center">
         {icon}
       </div>
       <input
