@@ -40,6 +40,30 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>provide</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>at.favre.lib</groupId>
+			<artifactId>bcrypt</artifactId>
+			<version>0.10.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
