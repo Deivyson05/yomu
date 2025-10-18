@@ -1,8 +1,7 @@
 HELP.md
-target/
+
 .mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+target/classes/application.properties
 .env
 src/main/resources/application.properties
 ### STS ###
