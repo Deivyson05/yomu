@@ -1,0 +1,27 @@
+spring.application.name=gamificacaoDaLeitura
+
+# application.properties
+spring.datasource.url={Url_BD}
+spring.datasource.username={username_BD}
+spring.datasource.password={Senha_BD}
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# JPA/Hibernate
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Pool de conexões (opcional, mas recomendado)
+spring.datasource.hikari.maximum-pool-size=10
+spring.datasource.hikari.minimum-idle=5
+
+# H2 para testes
+# spring.datasource.url=jdbc:h2:mem:testdb
+# spring.datasource.username=admin
+# spring.datasource.password=admin
+
+# spring.h2.console.enabled=true
+# spring.h2.console.path=/h2-console
+
+# spring.datasource.driverClassName=org.h2.Driver
