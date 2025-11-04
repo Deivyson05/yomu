@@ -48,12 +48,12 @@ export default function Credenciais() {
     }
 
     return (
-        <main className="flex flex-col h-screen">
-            <header className="flex justify-between p-4">
-                <Link href="#" className="font-bold text-xl text-blue-600">Voltar</Link>
+        <main className="flex flex-col h-screen bg-[#598C58]">
+            <header className="flex justify-between p-4 text-white">
+                <Link href="#" className="font-bold text-xl">Voltar</Link>
                 <h2 className="font-semibold text-xl">Cadastro</h2>
             </header>
-            <section className="flex flex-col p-4 justify-between flex-1">
+            <section className="flex flex-col p-8 justify-between flex-1 bg-gray-300 rounded-t-4xl fixed bottom-0 w-screen">
                 <div className="flex flex-row justify-between">
                     <h2 className="text-5xl font-semibold">
                         <span className="text-primary">Criar</span> <br /> conta!
@@ -83,8 +83,6 @@ export default function Credenciais() {
                         {erro}
                     </span>
                 </form>
-
-                <img src="/cadastro.png" alt="cadastro" className="w-full"/>
             </section>
         </main>
     )
