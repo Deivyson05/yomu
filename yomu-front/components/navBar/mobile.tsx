@@ -21,7 +21,7 @@ export function MobileNavBar() {
             <a href="/hankeada">
                 <Medal size={style.iconSize}/>
             </a>
-            <a href="perfil">
+            <a href="profile">
                 <User size={style.iconSize}/>
             </a>
         </nav>
