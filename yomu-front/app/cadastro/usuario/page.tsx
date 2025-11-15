@@ -18,10 +18,7 @@ export default function CadastroUsuario() {
     const router = useRouter();
 
     setData('cadastro', {
-        nome: '',
-        nascimento: '',
-        telefone: '',
-        genero: '',
+        nomeUsuario: '',
         email: '',
         senha: ''
     });
@@ -43,10 +40,10 @@ export default function CadastroUsuario() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         
-        updateData('cadastro', 'nome', nome);
-        updateData('cadastro', 'nascimento', nascimento);
-        updateData('cadastro', 'telefone', telefone);
-        updateData('cadastro', 'genero', genero);
+        updateData('cadastro', 'nomeUsuario', nome);
+        // updateData('cadastro', 'nascimento', nascimento);
+        // updateData('cadastro', 'telefone', telefone);
+        // updateData('cadastro', 'genero', genero);
 
         router.push('/cadastro/credenciais');
     }
@@ -69,7 +66,7 @@ export default function CadastroUsuario() {
                         Nome Completo
                         <Input id="nome" name="nome" placeholder="Alfredo Soares da Silva" onChange={handleNome}/>
                     </Label>
-                    <Label htmlFor="nascimento" className="font-semibold">
+                    {/* <Label htmlFor="nascimento" className="font-semibold">
                         Data de Nascimento
                         <Input id="nascimento" name="nascimento" type="date" placeholder="DD/MM/AAAA" onChange={handleNascimento}/>
                     </Label>
@@ -80,7 +77,7 @@ export default function CadastroUsuario() {
                     <Label className="font-semibold">
                         Sexo - Gênero
                         <ExampleCombobox items={genders} onSelect={handleSelection}/>
-                    </Label>
+                    </Label> */}
                     <button className="bg-primary p-4 rounded-md text-white font-semibold">
                         Próxima Etapa
                     </button>

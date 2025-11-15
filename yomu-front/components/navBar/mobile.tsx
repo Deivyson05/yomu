@@ -4,7 +4,7 @@ import { Link } from "lucide-react";
 export function MobileNavBar() {
     const style = {
         nav: `
-            flex justify-between p-8
+            flex justify-between px-8 py-6
             fixed bottom-0 w-screen
             bg-background border-t-2
         `,
@@ -15,7 +15,7 @@ export function MobileNavBar() {
             <a href="/home">
                 <House size={style.iconSize}/>
             </a>
-            <a href="/livros">
+            <a href="/biblioteca">
                 <LibraryBig size={style.iconSize}/>
             </a>
             <a href="/hankeada">

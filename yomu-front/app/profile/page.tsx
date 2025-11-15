@@ -8,12 +8,13 @@ import { Statistics } from "@/components/statistics";
 
 export default function Profile() {
   const [perfil, setPerfil] = useState({
-    nome: "Kethyllyn R.",
+    nome: getSessionData('user').nomeUsuario,
     xpAtual: 300,
     xpTotal: 800,
     level: 14,
     rank: 239,
     seguidores: 57,
+    fotoPerfil: "/images/perfil.png",
     badges: [
       { id: 1, nome: "Badge 1", img: "/images/badge1.png" },
       { id: 2, nome: "Badge 2", img: "/images/badge2.png" },
@@ -29,7 +30,24 @@ export default function Profile() {
     const getUser = async () => {
       try {
         const response = await getPerfil();
-        setPerfil(response);
+        setPerfil({
+          nome: response.nomeUsuario,
+          xpAtual: response.xpTotal,
+          xpTotal: 800,
+          level: response.nivelAtual,
+          rank: 239,
+          seguidores: 57,
+          fotoPerfil: response.fotoPerfil,
+          badges: [
+            { id: 1, nome: "Badge 1", img: "/images/badge1.png" },
+            { id: 2, nome: "Badge 2", img: "/images/badge2.png" },
+            { id: 3, nome: "Badge 3", img: "/images/badge3.png" },
+            { id: 4, nome: "Badge 4", img: "/images/badge4.png" },
+          ],
+          tarefas: [
+            { id: 1, nome: "Leia 20 páginas", tempo: "20min", concluida: false },
+          ],
+        });
       } catch (error) {
         console.error(error);
       }
@@ -47,7 +65,7 @@ export default function Profile() {
         {/* Cabeçalho com avatar */}
         <div className="flex flex-col items-center -mt-20">
           <img
-            src="/images/perfil.png"
+            src={perfil.fotoPerfil}
             alt="Foto de perfil"
             className="w-24 h-24 rounded-full object-cover border-4 border-[#324C39] bg-[#324C39] shadow-md"
           />

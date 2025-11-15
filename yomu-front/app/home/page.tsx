@@ -4,6 +4,7 @@ import { Progresso } from '@/components/Progresso'
 import { AtividadeAmigos } from '@/components/AtividadeAmigos'
 import { SeusLivros } from '@/components/SeusLivros'
 
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50 pb-24">
