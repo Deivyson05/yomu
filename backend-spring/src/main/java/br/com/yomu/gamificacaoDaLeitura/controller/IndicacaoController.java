@@ -1,108 +1,43 @@
-package com.yomu.controller;
+package br.com.yomu.gamificacaoDaLeitura.controller;
 
-import com.yomu.model.Indicacao;
-import com.yomu.service.IndicacaoService;
-import com.yomu.exception.IndicacaoException;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import br.com.yomu.gamificacaoDaLeitura.model.Indicacao;
+import br.com.yomu.gamificacaoDaLeitura.model.StatusIndicacao;
+import br.com.yomu.gamificacaoDaLeitura.service.IndicacaoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/indicacoes")
+@RequestMapping("/indicacoes")
+@RequiredArgsConstructor
 public class IndicacaoController {
-    
+
     private final IndicacaoService service;
-    
-    public IndicacaoController(IndicacaoService service) {
-        this.service = service;
-    }
-    
+
     @PostMapping
-    public ResponseEntity<Indicacao> criar(@RequestBody IndicacaoRequest request) {
-        try {
-            Indicacao indicacao = service.criar(
-                request.getUsuarioIndicadorId(),
-                request.getUsuarioIndicadoId(),
-                request.getLivroId(),
-                request.getMensagem()
-            );
-            return ResponseEntity.status(HttpStatus.CREATED).body(indicacao);
-        } catch (IndicacaoException e) {
-            return ResponseEntity.badRequest().build();
-        }
+    public Indicacao criarIndicacao(@RequestParam UUID usuarioIndicadorId,
+                                    @RequestParam UUID usuarioIndicadoId,
+                                    @RequestParam String livroId,
+                                    @RequestParam String mensagem) {
+
+        return service.criarIndicacao(usuarioIndicadorId, usuarioIndicadoId, livroId, mensagem);
     }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<Indicacao> buscarPorId(@PathVariable String id) {
-        return service.buscarPorId(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+
+    @GetMapping("/recebidas/{usuarioId}")
+    public List<Indicacao> recebidas(@PathVariable UUID usuarioId) {
+        return service.listarRecebidas(usuarioId);
     }
-    
-    @GetMapping("/usuario/{usuarioId}")
-    public ResponseEntity<List<Indicacao>> listarPorUsuario(@PathVariable String usuarioId) {
-        List<Indicacao> indicacoes = service.listarPorUsuario(usuarioId);
-        return ResponseEntity.ok(indicacoes);
+
+    @GetMapping("/enviadas/{usuarioId}")
+    public List<Indicacao> enviadas(@PathVariable UUID usuarioId) {
+        return service.listarEnviadas(usuarioId);
     }
-    
-    @GetMapping("/usuario/{usuarioId}/pendentes")
-    public ResponseEntity<List<Indicacao>> listarPendentes(@PathVariable String usuarioId) {
-        List<Indicacao> pendentes = service.listarPendentes(usuarioId);
-        return ResponseEntity.ok(pendentes);
-    }
-    
-    @PutMapping("/{id}/aceitar")
-    public ResponseEntity<Indicacao> aceitar(@PathVariable String id, 
-                                             @RequestParam String usuarioId) {
-        try {
-            Indicacao indicacao = service.aceitar(id, usuarioId);
-            return ResponseEntity.ok(indicacao);
-        } catch (IndicacaoException e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-    
-    @PutMapping("/{id}/recusar")
-    public ResponseEntity<Indicacao> recusar(@PathVariable String id, 
-                                             @RequestParam String usuarioId) {
-        try {
-            Indicacao indicacao = service.recusar(id, usuarioId);
-            return ResponseEntity.ok(indicacao);
-        } catch (IndicacaoException e) {
-            return ResponseEntity.badRequest().build();
-        }
-    }
-    
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable String id) {
-        service.excluir(id);
-        return ResponseEntity.noContent().build();
-    }
-    
-    // DTO interno para requests
-    public static class IndicacaoRequest {
-        private String usuarioIndicadorId;
-        private String usuarioIndicadoId;
-        private String livroId;
-        private String mensagem;
-        
-        public String getUsuarioIndicadorId() { return usuarioIndicadorId; }
-        public void setUsuarioIndicadorId(String usuarioIndicadorId) { 
-            this.usuarioIndicadorId = usuarioIndicadorId; 
-        }
-        
-        public String getUsuarioIndicadoId() { return usuarioIndicadoId; }
-        public void setUsuarioIndicadoId(String usuarioIndicadoId) { 
-            this.usuarioIndicadoId = usuarioIndicadoId; 
-        }
-        
-        public String getLivroId() { return livroId; }
-        public void setLivroId(String livroId) { this.livroId = livroId; }
-        
-        public String getMensagem() { return mensagem; }
-        public void setMensagem(String mensagem) { this.mensagem = mensagem; }
+
+    @PatchMapping("/{id}/status")
+    public Indicacao alterarStatus(@PathVariable UUID id,
+                                   @RequestParam StatusIndicacao status) {
+        return service.alterarStatus(id, status);
     }
 }

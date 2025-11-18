@@ -1,83 +1,47 @@
-package com.yomu.service;
+package br.com.yomu.gamificacaoDaLeitura.service;
 
-import com.yomu.model.Indicacao;
-import com.yomu.model.Indicacao.StatusIndicacao;
-import com.yomu.repository.IndicacaoRepository;
-import com.yomu.exception.IndicacaoException;
+import br.com.yomu.gamificacaoDaLeitura.model.Indicacao;
+import br.com.yomu.gamificacaoDaLeitura.model.StatusIndicacao;
+import br.com.yomu.gamificacaoDaLeitura.repository.IndicacaoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
-
-
+@Service
+@RequiredArgsConstructor
 public class IndicacaoService {
-    
+
     private final IndicacaoRepository repository;
-    
-    public IndicacaoService(IndicacaoRepository repository) {
-        this.repository = repository;
+
+    public Indicacao criarIndicacao(UUID usuarioIndicadorId,
+                                    UUID usuarioIndicadoId,
+                                    String livroId,
+                                    String mensagem) {
+
+        Indicacao i = Indicacao.builder()
+                .usuarioIndicadorId(usuarioIndicadorId)
+                .usuarioIndicadoId(usuarioIndicadoId)
+                .livroId(livroId)
+                .mensagem(mensagem)
+                .status(StatusIndicacao.PENDENTE)
+                .build();
+
+        return repository.save(i);
     }
-    
-    public Indicacao criar(String usuarioIndicadorId, String usuarioIndicadoId, 
-                          String livroId, String mensagem) throws IndicacaoException {
-        
-        validarIndicacaoDuplicada(usuarioIndicadorId, usuarioIndicadoId, livroId);
-        
-        Indicacao indicacao = new Indicacao(usuarioIndicadorId, usuarioIndicadoId, 
-                                           livroId, mensagem);
-        return repository.save(indicacao);
-    }
-    
-    public Optional<Indicacao> buscarPorId(String id) {
-        return repository.findById(id);
-    }
-    
-    public List<Indicacao> listarPorUsuario(String usuarioId) {
+
+    public List<Indicacao> listarRecebidas(UUID usuarioId) {
         return repository.findByUsuarioIndicadoId(usuarioId);
     }
-    
-    public List<Indicacao> listarPendentes(String usuarioId) {
-        return repository.findByUsuarioIndicadoIdAndStatus(usuarioId, StatusIndicacao.PENDENTE);
+
+    public List<Indicacao> listarEnviadas(UUID usuarioId) {
+        return repository.findByUsuarioIndicadorId(usuarioId);
     }
-    
-    public Indicacao aceitar(String indicacaoId, String usuarioId) throws IndicacaoException {
-        Indicacao indicacao = buscarEValidar(indicacaoId, usuarioId);
-        indicacao.aceitar();
-        return repository.update(indicacao);
-    }
-    
-    public Indicacao recusar(String indicacaoId, String usuarioId) throws IndicacaoException {
-        Indicacao indicacao = buscarEValidar(indicacaoId, usuarioId);
-        indicacao.recusar();
-        return repository.update(indicacao);
-    }
-    
-    public void excluir(String id) {
-        repository.delete(id);
-    }
-    
-    private void validarIndicacaoDuplicada(String indicadorId, String indicadoId, 
-                                          String livroId) throws IndicacaoException {
-        boolean existe = repository.findByUsuarioIndicadorId(indicadorId).stream()
-            .anyMatch(i -> i.getUsuarioIndicadoId().equals(indicadoId) &&
-                          i.getLivroId().equals(livroId) &&
-                          i.isPendente());
-        
-        if (existe) {
-            throw new IndicacaoException("Indicação duplicada");
-        }
-    }
-    
-    private Indicacao buscarEValidar(String indicacaoId, String usuarioId) 
-            throws IndicacaoException {
-        
-        Indicacao indicacao = buscarPorId(indicacaoId)
-            .orElseThrow(() -> new IndicacaoException("Indicação não encontrada"));
-        
-        if (!indicacao.getUsuarioIndicadoId().equals(usuarioId)) {
-            throw new IndicacaoException("Sem permissão");
-        }
-        
-        return indicacao;
+
+    public Indicacao alterarStatus(UUID indicacaoId, StatusIndicacao status) {
+        Indicacao i = repository.findById(indicacaoId).orElseThrow();
+        i.setStatus(status);
+        return repository.save(i);
     }
 }

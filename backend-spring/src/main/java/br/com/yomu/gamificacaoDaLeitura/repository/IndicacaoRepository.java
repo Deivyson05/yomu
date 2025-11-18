@@ -1,29 +1,14 @@
-package com.yomu.repository;
+package br.com.yomu.gamificacaoDaLeitura.repository;
 
-import com.yomu.model.Indicacao;
-import com.yomu.model.Indicacao.StatusIndicacao;
+import br.com.yomu.gamificacaoDaLeitura.model.Indicacao;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
+public interface IndicacaoRepository extends JpaRepository<Indicacao, UUID> {
 
+    List<Indicacao> findByUsuarioIndicadoId(UUID usuarioIndicadoId);
 
-
-public interface IndicacaoRepository {
-    
-    Indicacao save(Indicacao indicacao);
-    
-    Indicacao update(Indicacao indicacao);
-    
-    Optional<Indicacao> findById(String id);
-    
-    List<Indicacao> findByUsuarioIndicadorId(String usuarioId);
-    
-    List<Indicacao> findByUsuarioIndicadoId(String usuarioId);
-    
-    List<Indicacao> findByUsuarioIndicadoIdAndStatus(String usuarioId, StatusIndicacao status);
-    
-    void delete(String id);
-    
-    List<Indicacao> findAll();
+    List<Indicacao> findByUsuarioIndicadorId(UUID usuarioIndicadorId);
 }
