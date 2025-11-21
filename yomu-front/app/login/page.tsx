@@ -50,10 +50,11 @@ export default function Login() {
                                 email,
                                 senha
                             });
-                            router.push("/profile");
                         } catch (error) {
                             console.error(error);
                             setErro("Erro ao realizar login");
+                        } finally {
+                            router.push("/profile");
                         }
                     }}
                 >Entrar</Button>

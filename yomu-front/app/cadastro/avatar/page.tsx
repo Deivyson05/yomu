@@ -1,7 +1,8 @@
+'use client';
 import React, { useState } from "react";
 import "./styles.css";
 
-export function ProfileScreen() {
+export default function ProfileScreen() {
   const [selectedAvatar, setSelectedAvatar] = useState(0);
 
   const avatars = Array.from({ length: 12 }, (_, i) => i + 1); 
