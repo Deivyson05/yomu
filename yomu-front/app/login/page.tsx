@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import { postLogin } from "@/api";
+import { postLogin } from "@/api/api";
 
 export default function Login() {
     const router = useRouter();

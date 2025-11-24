@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from "react";
-import { getPerfil } from "@/api";
+import { getPerfil } from "@/api/api";
 import { getSessionData } from "@/core/sStorage";
 import { Progress } from "@/components/ui/progress";
 import { Star, BookOpen, Users, Award, Settings } from "lucide-react";

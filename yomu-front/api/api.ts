@@ -1,10 +1,10 @@
 'use client'
 
 import axios from "axios";
-import { getSessionData, setSessionData } from "./core/sStorage";
-import { getData } from "./core/lStorage";
+import { getSessionData, setSessionData } from "../core/sStorage";
+import { getData } from "../core/lStorage";
 
-const api = axios.create({
+export const api = axios.create({
     baseURL: 'https://sturdy-space-trout-4xw9ppx56g7357r-8080.app.github.dev/yomu'
 });
 
