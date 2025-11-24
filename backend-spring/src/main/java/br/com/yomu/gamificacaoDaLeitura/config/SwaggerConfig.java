@@ -31,7 +31,7 @@ public class SwaggerConfig {
                                 .url("http://localhost:8080")
                                 .description("Servidor de Desenvolvimento"),
                         new Server()
-                                .url("https://yomu-api-0tys.onrender.com/")
+                                .url("https://yomu-api-0tys.onrender.com/yomu")
                                 .description("Servidor de Produção")
                 ));
     }
