@@ -1,11 +1,13 @@
 // components/biblioteca/book-list.tsx
 import { Trash2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { setData } from "@/core/lStorage";
 
 interface Book {
     id: number;
-    title: string;
-    cover: string;
+    titulo: string;
+    capa: string;
 }
 
 interface BookCardProps {
@@ -19,17 +21,23 @@ interface BookListProps {
 }
 
 function BookCard({ book, onDelete }: BookCardProps) {
+    const router = useRouter();
     return (
         <div className="relative group">
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-2"
+                onClick={()=> {
+                    setData('livro', book.id);
+                    router.push(`/livro`);
+                }}
+            >
                 <p className="text-gray-800 text-sm font-semibold text-center px-1 min-h-[40px] flex items-center w-28 leading-tight">
-                    {book.title}
+                    {book.titulo}
                 </p>
                 
                 <div className="relative bg-gray-200 rounded-lg overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 group-active:scale-95 md:group-hover:-translate-y-1 w-28 h-40">
                     <img 
-                        src={book.cover} 
-                        alt={book.title}
+                        src={book.capa} 
+                        alt={book.titulo}
                         className="w-full h-full object-cover"
                     />
                 </div>

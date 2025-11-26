@@ -1,12 +1,8 @@
 // components/biblioteca/add-book-modal.tsx
+import { postLivro } from "@/api/livros";
+import { on } from "events";
 import { X } from "lucide-react";
 import { useState } from "react";
-
-interface AddBookModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: (data: BookFormData) => void;
-}
 
 interface BookFormData {
     titulo: string;
@@ -19,19 +15,26 @@ interface BookFormData {
     finalizado: boolean;
 }
 
-export function AddBookModal({ isOpen, onClose, onSubmit }: AddBookModalProps) {
-    const [formData, setFormData] = useState<BookFormData>({
+interface AddBookModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (data: BookFormData) => void;
+    book?: BookFormData;
+}
+
+export function AddBookModal({ isOpen, onClose, onSubmit, book }: AddBookModalProps) {
+    const [formData, setFormData] = useState<BookFormData>(book || {
         titulo: '',
         autor: '',
         numeroPaginas: 0,
         numeroCapitulos: 0,
         capa: '',
         descricao: '',
-        tipoRegistro: 'LEITURA',
+        tipoRegistro: 'PAGINA',
         finalizado: false
     });
 
-    const [errors, setErrors] = useState<Partial<Record<keyof BookFormData, string>>>({});
+    const [errors, setErrors] = useState<any>({});
 
     if (!isOpen) return null;
 
@@ -59,17 +62,7 @@ export function AddBookModal({ isOpen, onClose, onSubmit }: AddBookModalProps) {
         e.preventDefault();
         if (validate()) {
             onSubmit(formData);
-            setFormData({
-                titulo: '',
-                autor: '',
-                numeroPaginas: 0,
-                numeroCapitulos: 0,
-                capa: '',
-                descricao: '',
-                tipoRegistro: 'LEITURA',
-                finalizado: false
-            });
-            setErrors({});
+            onClose();
         }
     };
 
@@ -202,9 +195,8 @@ export function AddBookModal({ isOpen, onClose, onSubmit }: AddBookModalProps) {
                             onChange={handleChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                         >
-                            <option value="LEITURA">Leitura</option>
-                            <option value="RELEITURA">Releitura</option>
-                            <option value="ABANDONADO">Abandonado</option>
+                            <option value="PAGINA">Por páginas</option>
+                            <option value="CAPITULO">Por capítulos</option>
                         </select>
                     </div>
 
@@ -224,20 +216,6 @@ export function AddBookModal({ isOpen, onClose, onSubmit }: AddBookModalProps) {
                         />
                     </div>
 
-                    {/* Finalizado */}
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            id="finalizado"
-                            name="finalizado"
-                            checked={formData.finalizado}
-                            onChange={handleCheckbox}
-                            className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
-                        />
-                        <label htmlFor="finalizado" className="text-sm font-semibold text-gray-700">
-                            Livro finalizado
-                        </label>
-                    </div>
 
                     {/* Buttons */}
                     <div className="flex gap-4 pt-4">
@@ -260,5 +238,3 @@ export function AddBookModal({ isOpen, onClose, onSubmit }: AddBookModalProps) {
         </div>
     );
 }
-
-// ============================================

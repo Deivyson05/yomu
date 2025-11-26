@@ -1,4 +1,7 @@
-import { ArrowLeft, BookOpen, User, FileText, Hash, Calendar, CheckCircle } from "lucide-react";
+import { ArrowLeft, BookOpen, User, FileText, Hash, Calendar, CheckCircle, Pencil, Trash } from "lucide-react";
+import { AddBookModal } from "../biblioteca/add-book-modal";
+import { useState } from "react";
+import { putLivro } from "@/api/livros";
 
 // components/livro/book-details.tsx
 interface Book {
@@ -16,23 +19,28 @@ interface Book {
 
 interface BookDetailsProps {
     book: Book;
+    isLoaded: boolean
 }
 
-export function BookDetails({ book }: BookDetailsProps) {
+export function BookDetails({ book, isLoaded }: BookDetailsProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const getTipoRegistroLabel = (tipo: string) => {
         const tipos: Record<string, string> = {
-            'LEITURA': 'Leitura',
-            'RELEITURA': 'Releitura',
-            'ABANDONADO': 'Abandonado'
+            'PAGINAS': 'Páginas',
+            'CAPITULOS': 'Capitulos',
         };
         return tipos[tipo] || tipo;
     };
 
+    const handleEditBook = async (data: any) => {
+        const response = await putLivro(book.id, data);
+        console.log(response);
+    };
+
     const getTipoRegistroColor = (tipo: string) => {
         const cores: Record<string, string> = {
-            'LEITURA': 'bg-blue-100 text-blue-800',
-            'RELEITURA': 'bg-purple-100 text-purple-800',
-            'ABANDONADO': 'bg-red-100 text-red-800'
+            'PAGINAS': 'bg-blue-100 text-blue-800',
+            'CAPITULOS': 'bg-purple-100 text-purple-800',
         };
         return cores[tipo] || 'bg-gray-100 text-gray-800';
     };
@@ -41,7 +49,7 @@ export function BookDetails({ book }: BookDetailsProps) {
         <div className="bg-white min-h-screen pb-8">
             {/* Header com botão voltar */}
             <div className="sticky top-0 bg-white border-b z-20 px-4 py-4 flex items-center gap-4">
-                <button 
+                <button
                     onClick={() => window.history.back()}
                     className="p-2 hover:bg-gray-100 rounded-full transition-colors active:scale-95"
                     aria-label="Voltar"
@@ -56,8 +64,8 @@ export function BookDetails({ book }: BookDetailsProps) {
                 <div className="flex flex-col md:flex-row gap-6 mb-8">
                     {/* Capa */}
                     <div className="flex-shrink-0 mx-auto md:mx-0">
-                        <img 
-                            src={book.capa} 
+                        <img
+                            src={book.capa}
                             alt={book.titulo}
                             className="w-48 h-72 object-cover rounded-lg shadow-xl"
                         />
@@ -111,12 +119,35 @@ export function BookDetails({ book }: BookDetailsProps) {
                         </div>
 
                         {/* Data de adição */}
-                        <div className="flex items-center gap-2 text-gray-500 text-sm pt-2">
-                            <Calendar size={16} />
-                            <span>Adicionado em {new Date(book.createdAt).toLocaleDateString('pt-BR')}</span>
+                        <div className="flex justify-between items-center">
+                            <div className="flex items-center gap-2 text-gray-500 text-sm pt-2">
+                                <Calendar size={16} />
+                                <span>Adicionado em {new Date(book.createdAt).toLocaleDateString('pt-BR')}</span>
+                            </div>
+                            <div className="flex gap-2">
+                                <button className="bg-blue-400 text-white p-2 rounded-full"
+                                    onClick={() => setIsModalOpen(true)}
+                                >
+                                    <Pencil size={24} />
+                                </button>
+                                <button className="bg-red-400 text-white p-2 rounded-full">
+                                    <Trash size={24} />
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                {
+                    isLoaded ? (
+                        <AddBookModal
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                            onSubmit={handleEditBook}
+                            book={book}
+                        />
+                    ): ""
+                }
 
                 {/* Descrição */}
                 {book.descricao && (

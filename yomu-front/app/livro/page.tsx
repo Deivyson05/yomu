@@ -1,23 +1,35 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MobileNavBar } from '@/components/navBar/mobile';
 import { BookDetails } from '@/components/livro/book-details';
 import { ActionButtons } from '@/components/livro/action-buttons';
+import { getLivroId } from '@/api/livros';
+import { getData } from '@/core/lStorage';
 
 export default function LivroPage() {
     // Dados mockados do livro (virá da API/params)
-    const book = {
+    const [book, setBook] = useState({
         id: 1,
-        titulo: "1984",
-        autor: "George Orwell",
-        numeroPaginas: 416,
-        numeroCapitulos: 23,
-        capa: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=600&fit=crop",
-        descricao: "1984 é um romance distópico que retrata um futuro totalitário onde o governo controla todos os aspectos da vida. A história acompanha Winston Smith, um funcionário do Ministério da Verdade, que começa a questionar o regime opressor do Partido e seu líder, o Grande Irmão.",
-        tipoRegistro: "LEITURA",
+        titulo: 'Livro 1',
+        autor: 'Autor 1',
+        numeroPaginas: 100,
+        numeroCapitulos: 10,
+        capa: 'https://via.placeholder.com/150',
+        descricao: 'Descrição do livro 1',
+        tipoRegistro: 'LEITURA',
         finalizado: false,
-        createdAt: "2024-01-15"
-    };
+        createdAt: '2023-09-01T00:00:00.000Z'
+    });
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        async function fetchLivro() {
+            const livro = await getLivroId(getData('livro'));
+            setBook(livro)
+            setIsLoaded(true);
+        }
+        fetchLivro();
+    }, []);
 
     const handleProgressClick = () => {
         console.log('Navegar para Registrar Progresso');
@@ -31,7 +43,7 @@ export default function LivroPage() {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <BookDetails book={book} />
+            <BookDetails book={book} isLoaded={isLoaded} />
             <ActionButtons 
                 onProgressClick={handleProgressClick}
                 onTrilhaClick={handleTrilhaClick}

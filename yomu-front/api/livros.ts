@@ -11,7 +11,7 @@ export async function getUserLivros() {
     }
 }
 
-export async function getLivrosId(id: string) {
+export async function getLivroId(id: string) {
     try {
         const response = await api.get(`/api/livros/${id}`);
         return response.data;
