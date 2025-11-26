@@ -59,3 +59,13 @@ export async function putLivro(id: any, data: any) {
         throw error;
     }
 }
+
+export async function deleteLivroId(id: number) {
+    try {
+        const response = await api.delete(`/api/livros/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}

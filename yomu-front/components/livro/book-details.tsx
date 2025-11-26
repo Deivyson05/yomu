@@ -1,7 +1,8 @@
 import { ArrowLeft, BookOpen, User, FileText, Hash, Calendar, CheckCircle, Pencil, Trash } from "lucide-react";
 import { AddBookModal } from "../biblioteca/add-book-modal";
 import { useState } from "react";
-import { putLivro } from "@/api/livros";
+import { deleteLivroId, putLivro } from "@/api/livros";
+import { useRouter } from "next/navigation";
 
 // components/livro/book-details.tsx
 interface Book {
@@ -23,6 +24,7 @@ interface BookDetailsProps {
 }
 
 export function BookDetails({ book, isLoaded }: BookDetailsProps) {
+    const router = useRouter();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const getTipoRegistroLabel = (tipo: string) => {
         const tipos: Record<string, string> = {
@@ -130,7 +132,13 @@ export function BookDetails({ book, isLoaded }: BookDetailsProps) {
                                 >
                                     <Pencil size={24} />
                                 </button>
-                                <button className="bg-red-400 text-white p-2 rounded-full">
+                                <button className="bg-red-400 text-white p-2 rounded-full"
+                                    onClick={async ()=> {
+                                        await deleteLivroId(book.id);
+                                        alert('Livro excluido com sucesso');
+                                        router.push('/biblioteca');
+                                    }}
+                                >
                                     <Trash size={24} />
                                 </button>
                             </div>
