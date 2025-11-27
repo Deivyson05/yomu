@@ -4,7 +4,7 @@ import { on } from "events";
 import { X } from "lucide-react";
 import { useState } from "react";
 
-interface BookFormData {
+export interface BookFormData {
     titulo: string;
     autor: string;
     numeroPaginas: number;

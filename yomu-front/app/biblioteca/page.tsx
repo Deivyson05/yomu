@@ -27,8 +27,8 @@ export default function BibliotecaPage() {
         setBooks(books.filter(book => book.id !== bookId));
     };
 
-    const handleAddBook = async (bookData: any) => {
-        try {
+    const handleAddBook = async (bookData: BookFormData) => {
+        try { 
             const newBook = await postLivro(bookData);
             setBooks([...books, newBook]);
         } catch (error) {
