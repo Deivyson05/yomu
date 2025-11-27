@@ -1,46 +1,109 @@
 'use client'
 
-export function Header() {
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50 py-4 sm:py-4">
-      <div className="w-full flex justify-between items-center px-4 sm:px-6 max-w-6xl mx-auto">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">
-          Olá, Kel!
-        </h1>
+import { useRef } from 'react'
+import { useAppStore } from '@/lib/stores/useAppStore'
 
-        {/* dexair os icones à direita */}
-        <div className="flex gap-2 sm:gap-3 lg:gap-4 lg:ml-auto">
-          <button className="p-1.5 sm:p-2 rounded-full bg-green-800 hover:bg-green-700 active:bg-green-600 transition-colors cursor-pointer">
-            <svg 
-              width="18" 
-              height="18" 
-              className="sm:w-5 sm:h-5 lg:w-6 lg:h-6"
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2"
-            >
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.3-4.3"/>
-            </svg>
-          </button>
+export function Calendar() {
+  const { selectedDate, setSelectedDate } = useAppStore()
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Gerar dias do calendário dinamicamente
+  const generateCalendarDays = () => {
+    const days = []
+    const today = new Date()
+    
+    // Gerar 14 dias a partir de hoje
+    for (let i = -3; i < 11; i++) {
+      const date = new Date(today)
+      date.setDate(today.getDate() + i)
+      
+      days.push({
+        day: date.toLocaleDateString('pt-BR', { weekday: 'short' }),
+        date: date.getDate().toString(),
+        fullDate: date
+      })
+    }
+    
+    return days
+  }
+
+  const calendarDays = generateCalendarDays()
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = containerRef.current
+    if (!container) return
+
+    const startX = e.pageX
+    const scrollLeft = container.scrollLeft
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = e.pageX
+      const walk = (x - startX) * 1
+      container.scrollLeft = scrollLeft - walk
+    }
+
+    const handleMouseUp = () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+      document.body.style.cursor = 'default'
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+    document.body.style.cursor = 'grabbing'
+  }
+
+  // const handleDateClick = (date: Date) => {
+  //   setSelectedDate(date)
+  // }
+
+  // const isSelected = (date: Date) => {
+  //   return date.toDateString() === selectedDate.toDateString()
+  // }
+
+  const isToday = (date: Date) => {
+    const today = new Date()
+    return date.toDateString() === today.toDateString()
+  }
+
+  return (
+    <div className="w-full mb-6">
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-black">
+        Calendário
+      </h2>
+      
+      <div 
+        ref={containerRef}
+        onMouseDown={handleMouseDown}
+        className="flex gap-2 sm:gap-3 overflow-x-auto pb-2 cursor-pointer select-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4"
+      >
+        {calendarDays.map((item, index) => {
+          const today = isToday(item.fullDate)
           
-          <button className="p-1.5 sm:p-2 rounded-full bg-green-800 hover:bg-green-700 active:bg-green-600 transition-colors cursor-pointer">
-            <svg 
-              width="18" 
-              height="18" 
-              className="sm:w-5 sm:h-5 lg:w-6 lg:h-6"
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2"
+          return (
+            <div 
+              key={index}
+              className={`flex flex-col items-center justify-center rounded-xl sm:rounded-2xl border-2 shadow-sm p-2 sm:p-3 min-w-12 sm:min-w-16 flex-shrink-0 transition-all ${
+                today
+                  ? 'bg-green-800 text-white border-green-800' 
+                  : 'bg-white text-gray-900 border-green-800'  
+              }`}
             >
-              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
-              <circle cx="12" cy="7" r="4"/>
-            </svg>
-          </button>
-        </div>
+              <span className={`text-xs sm:text-sm font-medium ${
+                today ? 'text-white' : 'text-gray-600'
+              }`}>
+                {item.day}
+              </span>
+
+              <span className={`text-base sm:text-lg font-bold mt-0.5 sm:mt-1 ${
+                today ? 'text-white' : 'text-gray-900' 
+              }`}>
+                {item.date}
+              </span>
+            </div>
+          )
+        })}
       </div>
-    </header>
-  );
+    </div>
+  )
 }
