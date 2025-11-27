@@ -6,6 +6,7 @@ import { BookList } from '@/components/biblioteca/book-list';
 import { AddBookButton } from '@/components/biblioteca/add-book-button';
 import { AddBookModal } from '@/components/biblioteca/add-book-modal';
 import { getUserLivros, postLivro } from '@/api/livros';
+import { BookFormData } from '../../components/biblioteca/add-book-modal';
 
 export default function BibliotecaPage() {
     const [books, setBooks] = useState([
