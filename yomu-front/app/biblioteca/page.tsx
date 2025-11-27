@@ -7,6 +7,7 @@ import { AddBookButton } from '@/components/biblioteca/add-book-button';
 import { AddBookModal } from '@/components/biblioteca/add-book-modal';
 import { getUserLivros, postLivro } from '@/api/livros';
 import { BookFormData } from '../../components/biblioteca/add-book-modal';
+import { Book } from '@/components/livro/book-details';
 
 export default function BibliotecaPage() {
     const [books, setBooks] = useState([
@@ -15,7 +16,7 @@ export default function BibliotecaPage() {
 
     useEffect(() => {
         async function fetchUserLivros() {
-            const books: any = await getUserLivros();
+            const books: Book[] = await getUserLivros();
             console.log(books);
             setBooks(books);
         }
