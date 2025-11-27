@@ -76,7 +76,7 @@ html::-webkit-scrollbar-thumb:hover {
   --popover-foreground: oklch(0.141 0.005 285.823);
   --primary: oklch(44.202% 0.06126 143.739);
   --primary-foreground: oklch(0.97 0.014 254.604);
-  --secondary: oklch(88.531% 0.0001 271.152);
+  --secondary: oklch(82.032% 0.00009 271.152);
   --secondary-foreground: oklch(0.21 0.006 285.885);
   --muted: oklch(0.967 0.001 286.375);
   --muted-foreground: oklch(0.552 0.016 285.938);

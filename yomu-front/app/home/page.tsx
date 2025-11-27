@@ -1,9 +1,9 @@
-import { Header } from '@/components/home/Header'
-import { Calendar } from '@/components/home/Calendar'
-import { Progresso } from '@/components/home/Progresso'
-import { AtividadeAmigos } from '@/components/home/AtividadeAmigos'
-import { SeusLivros } from '@/components/home/SeusLivros'
-import { Navigation } from '@/components/home/Navigation'
+import { Header } from '@/components/Header'
+import { Calendar } from '@/components/Calendar'
+import { Progresso } from '@/components/Progresso'
+import { AtividadeAmigos } from '@/components/AtividadeAmigos'
+import { SeusLivros } from '@/components/SeusLivros'
+
 
 export default function Home() {
   return (
@@ -20,9 +20,6 @@ export default function Home() {
           <SeusLivros />
         </div>
       </div>
-
-      {/* Navegação fixa */}
-      <Navigation />
     </main>
   )
 }

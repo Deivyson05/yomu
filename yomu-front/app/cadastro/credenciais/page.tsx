@@ -6,7 +6,7 @@ import { Label } from "@radix-ui/react-label";
 import { getData, updateData } from "@/core/lStorage";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { cadUsuario } from "@/api";
+import { cadUsuario } from "@/api/api";
 
 export default function Credenciais() {
     const [email, setEmail] = useState("");
