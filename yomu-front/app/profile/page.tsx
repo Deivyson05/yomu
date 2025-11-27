@@ -37,7 +37,7 @@ export default function Profile() {
           level: response.nivelAtual,
           rank: 239,
           seguidores: 57,
-          fotoPerfil: `https://sturdy-space-trout-4xw9ppx56g7357r-8080.app.github.dev/yomu${response.foto}`,
+          fotoPerfil: `https://yomu-api-0tys.onrender.com/yomu${response.foto}`,
           badges: [
             { id: 1, nome: "Badge 1", img: "/images/badge1.png" },
             { id: 2, nome: "Badge 2", img: "/images/badge2.png" },

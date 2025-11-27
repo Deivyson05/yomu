@@ -5,7 +5,7 @@ import { getSessionData, setSessionData } from "../core/sStorage";
 import { getData } from "../core/lStorage";
 
 export const api = axios.create({
-    baseURL: 'https://sturdy-space-trout-4xw9ppx56g7357r-8080.app.github.dev/yomu'
+    baseURL: 'https://yomu-api-0tys.onrender.com/yomu'
 });
 
 export const cadUsuario = async (data: any) => {
