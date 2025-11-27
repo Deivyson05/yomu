@@ -34,7 +34,7 @@ export function BookDetails({ book, isLoaded }: BookDetailsProps) {
         return tipos[tipo] || tipo;
     };
 
-    const handleEditBook = async (data: any) => {
+    const handleEditBook = async (data: Book) => {
         const response = await putLivro(book.id, data);
         console.log(response);
     };
