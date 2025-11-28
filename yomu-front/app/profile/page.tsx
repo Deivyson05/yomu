@@ -31,13 +31,13 @@ export default function Profile() {
       try {
         const response = await getPerfil();
         setPerfil({
-          nome: response.username,
+          nome: response.nomeUsuario,
           xpAtual: response.xpTotal,
           xpTotal: 800,
           level: response.nivelAtual,
           rank: 239,
           seguidores: 57,
-          fotoPerfil: `https://yomu-api-0tys.onrender.com/yomu${response.foto}`,
+          fotoPerfil: `https://yomu-api-0tys.onrender.com/yomu${response.fotoPerfil}`,
           badges: [
             { id: 1, nome: "Badge 1", img: "/images/badge1.png" },
             { id: 2, nome: "Badge 2", img: "/images/badge2.png" },
