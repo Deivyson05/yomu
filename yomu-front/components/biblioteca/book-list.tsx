@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { setData } from "@/core/lStorage";
 
-interface Book {
+export interface Book {
     id: number;
     titulo: string;
     capa: string;

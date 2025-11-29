@@ -1,18 +1,18 @@
 export const genders = [
     {
-        value: "masc",
+        value: "masculino",
         label: "Masculino"
     },
     {
-        value: "fem",
+        value: "feminino",
         label: "Feminino"
     },
     {
-        value: "nb",
+        value: "nao binario",
         label: "Não binário"
     },
     {
-        value: "sla",
+        value: "prefiro nao dizer",
         label: "Prefiro não dizer"
     },
 ]

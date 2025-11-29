@@ -19,7 +19,7 @@ export function MobileNavBar() {
   const navItems: NavItem[] = [
     { href: '/home', icon: House, label: 'Início' },
     { href: '/biblioteca', icon: LibraryBig, label: 'Biblioteca' },
-    { href: '/rankeada', icon: Medal, label: 'Rankeada' },
+    { href: '/ranking', icon: Medal, label: 'Rankeada' },
     { href: '/profile', icon: User, label: 'Perfil' }
   ];
 

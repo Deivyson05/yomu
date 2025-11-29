@@ -5,6 +5,18 @@ import { BookDetails } from '@/components/livro/book-details';
 import { ActionButtons } from '@/components/livro/action-buttons';
 import { getLivroId } from '@/api/livros';
 import { getData } from '@/core/lStorage';
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Pause, Play, Square } from 'lucide-react';
 
 export default function LivroPage() {
     // Dados mockados do livro (virá da API/params)
@@ -44,14 +56,33 @@ export default function LivroPage() {
     return (
         <div className="min-h-screen bg-gray-50">
             <BookDetails book={book} isLoaded={isLoaded} />
+
+            <Dialog>
+                <DialogTrigger className='px-6 flex w-full'>
+                    <Button className='p-6 w-full'>Iniciar Leitura</Button>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>Iniciar Leitura</DialogHeader>
+                    <div className='flex w-full justify-center'>
+                        <strong className='text-4xl'>0:00</strong>
+                    </div>
+                    <DialogDescription className='flex w-full justify-center gap-4'>
+                        <button className='bg-blue-400 p-4 rounded-full text-white'>
+                            <Play/>
+                        </button>
+                        <button className='bg-red-500 p-4 rounded-full text-white'>
+                            <Square/>
+                        </button>
+                    </DialogDescription>
+                </DialogContent>
+            </Dialog>
+            
+
             <ActionButtons 
                 onProgressClick={handleProgressClick}
                 onTrilhaClick={handleTrilhaClick}
             />
             
-            <div className="md:hidden">
-                <MobileNavBar />
-            </div>
         </div>
     );
 }

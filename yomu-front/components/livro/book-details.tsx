@@ -1,5 +1,5 @@
 import { ArrowLeft, BookOpen, User, FileText, Hash, Calendar, CheckCircle, Pencil, Trash } from "lucide-react";
-import { AddBookModal } from "../biblioteca/add-book-modal";
+import { AddBookModal, BookFormData } from "../biblioteca/add-book-modal";
 import { useState } from "react";
 import { deleteLivroId, putLivro } from "@/api/livros";
 import { useRouter } from "next/navigation";
@@ -34,7 +34,7 @@ export function BookDetails({ book, isLoaded }: BookDetailsProps) {
         return tipos[tipo] || tipo;
     };
 
-    const handleEditBook = async (data: any) => {
+    const handleEditBook = async (data: BookFormData) => {
         const response = await putLivro(book.id, data);
         console.log(response);
     };

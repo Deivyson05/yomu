@@ -7,7 +7,7 @@ export default function Welcome() {
     return (
         <main className="flex flex-col">
             <header className="flex justify-start p-4 fixed w-screen top-0">
-                <strong className="text-xl text-primary">Nome do app</strong>
+                <strong className="text-xl text-primary">Yomu</strong>
             </header>
             <section className="h-screen flex flex-col justify-center p-8 gap-2">
                 <img src="/welcome.png" alt="welcome" />

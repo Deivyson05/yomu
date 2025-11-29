@@ -4,8 +4,10 @@ import axios from "axios";
 import { getSessionData, setSessionData } from "../core/sStorage";
 import { getData } from "../core/lStorage";
 
+export const url = "http://localhost:8080/yomu"
+
 export const api = axios.create({
-    baseURL: 'https://sturdy-space-trout-4xw9ppx56g7357r-8080.app.github.dev/yomu'
+    baseURL: url
 });
 
 export const cadUsuario = async (data: any) => {

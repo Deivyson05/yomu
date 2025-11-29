@@ -1,6 +1,5 @@
 'use client'
 
-import { CardLogin } from "@/components/cardLogin"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -24,7 +23,7 @@ export default function Login() {
     return (
         <main className="flex flex-col items-center justify-end h-screen bg-[#598C58]">
             <header className="flex justify-start w-screen fixed top-0 p-4">
-                <strong className="text-xl text-white">Nome do app</strong>
+                <strong className="text-xl text-white">Yomu</strong>
             </header>
             <section className="flex flex-col bg-gray-300 w-screen p-8 gap-4 rounded-t-4xl">
                 <h1 className="text-4xl font-semibold">

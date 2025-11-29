@@ -42,7 +42,7 @@ export default function Onboarding() {
     return (
         <main className={`flex flex-col h-screen`}>
             <header className='text-white fixed flex justify-between top-0 z-10 w-screen p-8'>
-                <strong className='text-shadow-lg text-xl'>Nome do app</strong>
+                <strong className='text-shadow-lg text-xl'>Yomu</strong>
                 <a href="/login" className='text-shadow-lg font-bold text-xl'>Pular</a>
             </header>
             <Carousel setApi={setApi} className='w-full h-full'

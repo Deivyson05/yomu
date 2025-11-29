@@ -1,0 +1,235 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background-color: #cdaaaa;
+  padding: 24px 0 100px; /* espaço para a barra inferior */
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+
+.card {
+  background-color: #2f4f3f;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.title {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.toggle {
+  display: flex;
+  justify-content: center;
+  background: #4e6658;
+  border-radius: 30px;
+  padding: 4px;
+  width: 220px;
+  margin-bottom: 28px;
+}
+
+.toggle button {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 30px;
+  color: #eaeaea;
+  font-weight: 600;
+  padding: 8px 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.toggle button.active {
+  background: #fff;
+  color: #2f4f3f;
+}
+
+.podium {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 32px;
+  transition: all 0.4s ease;
+}
+
+.podiumCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.avatarWrap, .avatarWrapLarge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+}
+
+.avatarLarge {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+}
+
+.name {
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+}
+
+.points {
+  color: #f8f8f8;
+  font-size: 14px;
+  text-align: center;
+  margin-top: -2px;
+}
+
+.podiumBlock {
+  width: 60px;
+  height: 100px;
+  border-radius: 10px;
+  margin-top: 8px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.first {
+  background: #d1d1d1;
+  height: 130px;
+}
+
+.second {
+  background: #b5b5b5;
+  height: 110px;
+}
+
+.third {
+  background: #9b9b9b;
+  height: 100px;
+}
+
+.listCard {
+  background: #fff;
+  width: 100%;
+  border-radius: 20px;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+}
+
+.rankCircle {
+  background: #f0f0f0;
+  color: #555;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.itemAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemName {
+  font-weight: 700;
+  color: #222;
+}
+
+.itemPoints {
+  color: #666;
+  font-size: 14px;
+}
+
+/* ====== NAV BAR MOBILE ====== */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+
+.navBtn {
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.navBtn:hover {
+  transform: scale(1.2);
+}
+
+/* ====== ANIMAÇÕES ====== */
+.fadeEnter {
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.fadeEnterActive {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}

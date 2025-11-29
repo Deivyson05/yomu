@@ -4,20 +4,25 @@ import { useState, useEffect } from 'react';
 import { MobileNavBar } from '@/components/navBar/mobile';
 import { BookList } from '@/components/biblioteca/book-list';
 import { AddBookButton } from '@/components/biblioteca/add-book-button';
-import { AddBookModal } from '@/components/biblioteca/add-book-modal';
+import { AddBookModal, BookFormData } from '@/components/biblioteca/add-book-modal';
 import { getUserLivros, postLivro } from '@/api/livros';
+import { Loading } from '@/components/loading';
 
 export default function BibliotecaPage() {
     const [books, setBooks] = useState([
         { id: 1, titulo: "1984", capa: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&h=400&fit=crop" },
     ]);
 
+    const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(() => {
         async function fetchUserLivros() {
             const books: any = await getUserLivros();
             console.log(books);
             setBooks(books);
+            setIsLoaded(true);
         }
+        setIsLoaded(false);
         fetchUserLivros();
     }, [])
 
@@ -27,7 +32,7 @@ export default function BibliotecaPage() {
         setBooks(books.filter(book => book.id !== bookId));
     };
 
-    const handleAddBook = async (bookData: any) => {
+    const handleAddBook = async (bookData: BookFormData) => {
         try {
             const newBook = await postLivro(bookData);
             setBooks([...books, newBook]);
@@ -44,7 +49,15 @@ export default function BibliotecaPage() {
                 <h1 className="text-3xl font-bold text-gray-800">Sua Estante</h1>
             </header>
 
-            <BookList books={books} onDeleteBook={handleDeleteBook} />
+            {
+                isLoaded? (
+                    <BookList books={books} onDeleteBook={handleDeleteBook} />
+                ): (
+                    <div className='w-full h-screen flex items-center justify-center'>
+                        <Loading />
+                    </div>
+                )
+            }
 
             <AddBookButton onClick={() => setIsModalOpen(true)} />
 

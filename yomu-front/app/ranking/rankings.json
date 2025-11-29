@@ -1,0 +1,66 @@
+{
+  "weekly": [
+    {
+      "id": 1,
+      "name": "Tanjiro Kamado",
+      "points": 130,
+      "avatar": "https://static.wikitide.net/deathbattlewiki/9/98/Portrait.tanjirokamado.png"
+    },
+    {
+      "id": 2,
+      "name": "Inosuke Hashibira",
+      "points": 120,
+      "avatar": "https://preview.redd.it/inosuke-hashibira-demon-slayer-vs-arataki-itto-genshin-v0-t4q1wave4kue1.jpg?width=640&crop=smart&auto=webp&s=011d2262bd129c473622b2759d2909ed56b50e96"
+    },
+    {
+      "id": 3,
+      "name": "zenitsu agatsuma",
+      "points": 110,
+      "avatar": "https://i.pinimg.com/474x/27/26/bd/2726bdc90eaa948458a0cbb97c1f56a6.jpg"
+    },
+    {
+      "id": 4,
+      "name": "João Silva",
+      "points": 90,
+      "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlf7_JSrZZZk2srQOFzbHnR1fG4xzDMAQG0A&s"
+    },
+    {
+      "id": 5,
+      "name": "Pedro Soares",
+      "points": 85,
+      "avatar": "https://i.pinimg.com/736x/6b/cf/aa/6bcfaaab4c5d83e48e90d0e3306289e7.jpg"
+    }
+  ],
+  "monthly": [
+    {
+      "id": 1,
+      "name": "Mariana",
+      "points": 450,
+      "avatar": "https://i.pinimg.com/474x/18/b9/ff/18b9ffb2a8a791d50213a9d595c4dd52.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Carlos",
+      "points": 420,
+      "avatar": "https://i.pinimg.com/736x/56/af/7e/56af7ed2c15a58fed21e8ffd0744bb1e.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Ana",
+      "points": 400,
+      "avatar": "https://tr.rbxcdn.com/180DAY-15b320a990235a1dc3456b89738d8b4d/420/420/Hat/Webp/noFilter"
+    },
+    {
+      "id": 4,
+      "name": "João Silva",
+      "points": 360,
+      "avatar": "https://i.pinimg.com/474x/cf/4a/c1/cf4ac168846158fc8dca8e80adf2e264.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Pedro Soares",
+      "points": 340,
+      "avatar": "https://i.pinimg.com/originals/f9/18/bc/f918bc7ddb4658dcf4ce70a21b3fd31d.jpg"
+    }
+  ]
+}

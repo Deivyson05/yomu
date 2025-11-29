@@ -21,8 +21,8 @@ export default function CadastroUsuario() {
 
     setData('cadastro', {
         nome: '',
-        username: '',
-        foto: '',
+        nomeUsuario: '',
+        fotoPerfil: '',
         genero: '',
         email: '',
         senha: ''
@@ -56,9 +56,9 @@ export default function CadastroUsuario() {
         event.preventDefault();
         
         updateData('cadastro', 'nome', nome);
-        updateData('cadastro', 'username', nickname);
+        updateData('cadastro', 'nomeUsuario', nickname);
         updateData('cadastro', 'genero', genero);
-        updateData('cadastro', 'foto', preview);
+        updateData('cadastro', 'fotoPerfil', preview);
 
         router.push('/cadastro/credenciais');
     }
