@@ -12,11 +12,11 @@ import { BookFormData } from '@/components/biblioteca/add-book-modal'
 
 export default function Home() {
       const [isLoaded, setIsLoaded] = useState(false);
-      const [books, setBooks] = useState<BookFormData[]>([]);
+      const [books, setBooks] = useState<Book[]>([]);
 
       useEffect(() => {
           async function fetchUserLivros() {
-              const books: BookFormData[] = await getUserLivros();
+              const books: Book[] = await getUserLivros();
               console.log(books);
               setBooks(books);
               setIsLoaded(true);

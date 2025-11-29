@@ -8,6 +8,7 @@ export interface Book {
     id: number;
     titulo: string;
     capa: string;
+    autor?: string;
 }
 
 interface BookCardProps {
