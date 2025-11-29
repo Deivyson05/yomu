@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import {
     Carousel,
@@ -12,6 +13,7 @@ import {
 
 
 export default function Onboarding() {
+    const router = useRouter();
     const [step, setStep] = useState(0);
 
     const [api, setApi] = useState<CarouselApi | null>(null)
@@ -23,27 +25,27 @@ export default function Onboarding() {
     ]
 
     const handleNext = () => {
-        if (!api) {
-            console.error("erro ao conectar com a api");
-            return;
-        }
-        api.scrollNext() // avança o slide
+        if (!api) return;
+
+        // Se NÃO for o último slide, avança
         if (step < onboarding.length - 1) {
-            setStep(step + 1)
+            api.scrollNext();
+            setStep(step + 1); // Garante que o passo atualize
         } else {
-            window.location.href = '/login';
+            // Se for o último, navega para login
+            router.push('/login');
         }
     }
 
     const handleSkip = () => {
-        window.location.href = '/';
+        router.push('/login');
     }
 
     return (
         <main className={`flex flex-col h-screen`}>
             <header className='text-white fixed flex justify-between top-0 z-10 w-screen p-8'>
                 <strong className='text-shadow-lg text-xl'>Yomu</strong>
-                <a href="/login" className='text-shadow-lg font-bold text-xl'>Pular</a>
+                <button onClick={handleSkip} className='text-shadow-lg font-bold text-xl'>Pular</button>
             </header>
             <Carousel setApi={setApi} className='w-full h-full'
                 opts={
