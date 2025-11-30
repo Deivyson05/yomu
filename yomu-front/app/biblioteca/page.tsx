@@ -7,35 +7,21 @@ import { AddBookButton } from '@/components/biblioteca/add-book-button';
 import { AddBookModal, BookFormData } from '@/components/biblioteca/add-book-modal';
 import { getUserLivros, postLivro } from '@/api/livros';
 import { Loading } from '@/components/loading';
+import useSWR, {mutate} from 'swr';
+import { useRouter } from 'next/navigation';
 
 export default function BibliotecaPage() {
-    const [books, setBooks] = useState([
-        { id: 1, titulo: "1984", capa: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&h=400&fit=crop" },
-    ]);
 
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        async function fetchUserLivros() {
-            const books: any = await getUserLivros();
-            console.log(books);
-            setBooks(books);
-            setIsLoaded(true);
-        }
-        setIsLoaded(false);
-        fetchUserLivros();
-    }, [])
+    const { data: books, error, isLoading } = useSWR("user-livros", getUserLivros)
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleDeleteBook = (bookId: number) => {
-        setBooks(books.filter(book => book.id !== bookId));
-    };
+    const router = useRouter();
 
     const handleAddBook = async (bookData: BookFormData) => {
         try {
-            const newBook = await postLivro(bookData);
-            setBooks([...books, newBook]);
+            await postLivro(bookData);
+            mutate("user-livros");
         } catch (error) {
             alert("Erro ao cadastrar livro");
         }
@@ -50,13 +36,21 @@ export default function BibliotecaPage() {
             </header>
 
             {
-                isLoaded? (
-                    <BookList books={books} onDeleteBook={handleDeleteBook} />
+                isLoading == false? (
+                    <BookList books={books} />
                 ): (
-                    <div className='w-full h-screen flex items-center justify-center'>
+                    <div className='w-full h-180 flex items-center justify-center'>
                         <Loading />
                     </div>
                 )
+            }
+
+            {
+                error? (
+                    <div className='w-full h-screen flex items-center justify-center'>
+                        <h1 className='text-2xl font-bold text-gray-800'>Erro ao carregar livros</h1>
+                    </div>
+                ):(null)
             }
 
             <AddBookButton onClick={() => setIsModalOpen(true)} />
@@ -66,12 +60,6 @@ export default function BibliotecaPage() {
                 onClose={() => setIsModalOpen(false)}
                 onSubmit={handleAddBook}
             />
-
-            <div className="md:hidden">
-                <MobileNavBar />
-            </div>
         </div>
     );
 }
-
-// ============================================

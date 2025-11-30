@@ -3,6 +3,7 @@ import { AddBookModal, BookFormData } from "../biblioteca/add-book-modal";
 import { useState } from "react";
 import { deleteLivroId, putLivro } from "@/api/livros";
 import { useRouter } from "next/navigation";
+import { mutate } from "swr";
 
 // components/livro/book-details.tsx
 interface Book {
@@ -21,9 +22,11 @@ interface Book {
 interface BookDetailsProps {
     book: Book;
     isLoaded: boolean
+    cacheId: string
+    isLoading: boolean
 }
 
-export function BookDetails({ book, isLoaded }: BookDetailsProps) {
+export function BookDetails({ book, isLoaded, cacheId, isLoading }: BookDetailsProps) {
     const router = useRouter();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const getTipoRegistroLabel = (tipo: string) => {
@@ -36,6 +39,7 @@ export function BookDetails({ book, isLoaded }: BookDetailsProps) {
 
     const handleEditBook = async (data: BookFormData) => {
         const response = await putLivro(book.id, data);
+        mutate(`book-${cacheId}`);
         console.log(response);
     };
 
@@ -147,7 +151,7 @@ export function BookDetails({ book, isLoaded }: BookDetailsProps) {
                 </div>
 
                 {
-                    isLoaded ? (
+                    isLoading == false ? (
                         <AddBookModal
                             isOpen={isModalOpen}
                             onClose={() => setIsModalOpen(false)}
