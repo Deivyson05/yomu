@@ -55,7 +55,7 @@ export default function Page() {
                     src={`${url}${response.ranking[1]?.foto_perfil}`}
                     alt={response.ranking[1]?.nome_usuario}
                     className={styles.avatar}
-                    onError={(e: any) => {
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                       e.currentTarget.src = "https://i.pinimg.com/736x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg"
                     }}
                   />
@@ -71,7 +71,7 @@ export default function Page() {
                     src={`${url}${response.ranking[0]?.foto_perfil}`}
                     alt={response.ranking[0]?.nome_usuario}
                     className={styles.avatarLarge}
-                    onError={(e: any) => {
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                       e.currentTarget.src = "https://i.pinimg.com/736x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg"
                     }}
                   />
@@ -87,7 +87,7 @@ export default function Page() {
                     src={`${url}${response.ranking[2]?.foto_perfil}`}
                     alt={response.ranking[2]?.nome_usuarioe}
                     className={styles.avatar}
-                    onError={(e: any) => {
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                       e.currentTarget.src = "https://i.pinimg.com/736x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg"
                     }}
                   />
@@ -103,7 +103,7 @@ export default function Page() {
                 <div key={u.id} className={styles.listItem}>
                   <div className={styles.rankCircle}>{idx + 1}</div>
                   <img src={`${url}${u.foto_perfil}`} alt={u.name} className={styles.itemAvatar}
-                    onError={(e: any) => {
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                       e.currentTarget.src = "https://i.pinimg.com/736x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg"
                     }}
                   />

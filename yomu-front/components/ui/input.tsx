@@ -23,8 +23,8 @@ function Input({ className, type, name, id, ...props }: React.ComponentProps<"in
     icon = <BadgeQuestionMark />;
   }
 
-  let styleInput = type == "file" ? "hidden" : "";
-  let styleDiv = type == "file" ? "flex items-center justify-center" : "";
+  const styleInput = type == "file" ? "hidden" : "";
+  const styleDiv = type == "file" ? "flex items-center justify-center" : "";
 
   return (
     <div className={`flex h-14 rounded-md overflow-hidden shadow-sm w-full ${styleDiv}`}>

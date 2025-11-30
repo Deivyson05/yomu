@@ -34,7 +34,7 @@ export function AddBookModal({ isOpen, onClose, onSubmit, book }: AddBookModalPr
         finalizado: false
     });
 
-    const [errors, setErrors] = useState<any>({});
+    const [errors, setErrors] = useState<Partial<Record<keyof BookFormData, string>>>({});
 
     if (!isOpen) return null;
 
