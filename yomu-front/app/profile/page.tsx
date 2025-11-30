@@ -8,7 +8,7 @@ import { Statistics } from "@/components/statistics";
 
 export default function Profile() {
   const [perfil, setPerfil] = useState({
-    nome: getSessionData('user').nomeUsuario,
+    nome: 'Filomena123',
     xpAtual: 300,
     xpTotal: 800,
     level: 14,
