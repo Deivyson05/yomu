@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Carousel,
     CarouselContent,
@@ -33,6 +33,14 @@ export default function Onboarding() {
         color: "bg-[#F7B047]"
     }
 ];
+
+    useEffect(() => {
+        if (!api) return;
+
+        api.on("select", () => {
+            setStep(api.selectedScrollSnap());
+        });
+    }, [api]);
 
     const handleNext = () => {
 
