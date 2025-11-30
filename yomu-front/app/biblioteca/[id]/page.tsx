@@ -46,10 +46,10 @@ export default function LivroPage() {
     const [isRunning, setIsRunning] = useState(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-    const [pagAtual, setPagAtual] = useState(0);
+    const [pagLida, setPagLida] = useState(0);
 
-    const handlePagAtual = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPagAtual(parseInt(event.target.value));
+    const handlePagLida = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPagLida(parseInt(event.target.value));
     }
 
 
@@ -91,12 +91,11 @@ export default function LivroPage() {
         setIsRunning(false);
         setSeconds(0);
         setMinutes(0);
-        // Aqui você pode adicionar lógica para salvar o tempo de leitura
+        
         const response = await postProgresso(book.id, {
-            quantidade: pagAtual,
+            quantidade: pagLida,
             tipoProgresso: book.tipoRegistro,
-        })
-        console.log('Tempo de leitura:', minutes, 'minutos e', seconds, 'segundos');
+        });
     };
 
     const formatTime = (value: number) => {
@@ -158,13 +157,13 @@ export default function LivroPage() {
                                                         <Button className="bg-red-500 hover:bg-red-600"
                                                             onClick={() => {
                                                                 handleStop();
-                                                                //reccarregar página
+                                                                router.push(`/biblioteca`);
                                                             }}
                                                         >Parar leitura</Button>
                                                     </DialogClose>
                                                     <label htmlFor="stopInput">
-                                                        Página atual
-                                                        <input type="number" id='stopInput' className='w-full p-2 rounded-lg bg-gray-100 text-gray-700 border-2 border-gray-400' onChange={handlePagAtual} />
+                                                        Quantas páginas você leu?
+                                                        <input type="number" id='stopInput' className='w-full p-2 rounded-lg bg-gray-100 text-gray-700 border-2 border-gray-400' onChange={handlePagLida} />
                                                     </label>
                                                 </DialogFooter>
                                             </DialogContent>

@@ -40,7 +40,7 @@ export function SeusLivros({ books }: Props) {
                 {book.titulo}
               </h3>
               <p className="text-gray-600 text-[10px] sm:text-xs cursor-text">
-                por {book.capa}
+                por {book.autor}
               </p>
             </div>
           </div>

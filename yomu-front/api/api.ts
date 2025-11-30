@@ -4,7 +4,7 @@ import axios from "axios";
 import { getSessionData, setSessionData } from "../core/sStorage";
 import { getData } from "../core/lStorage";
 
-export const url = "http://localhost:8080/yomu"
+export const url = "https://yomu-api-0tys.onrender.com/yomu"
 
 export const api = axios.create({
     baseURL: url

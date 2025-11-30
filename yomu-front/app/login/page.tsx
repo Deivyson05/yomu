@@ -43,17 +43,16 @@ export default function Login() {
                 </Label>
 
                 <Button variant={"default"}
-                    onClick={() => {
+                    onClick={async () => {
                         try {
-                            postLogin({
+                            await postLogin({
                                 email,
                                 senha
                             });
+                            router.push("/profile");
                         } catch (error) {
                             console.error(error);
                             setErro("Erro ao realizar login");
-                        } finally {
-                            router.push("/profile");
                         }
                     }}
                 >Entrar</Button>
