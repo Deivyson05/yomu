@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import { ExampleCombobox } from "@/components/ui/combobox";
 import { genders } from "./genders";
 import { setData, updateData } from "@/core/lStorage";
@@ -19,14 +19,16 @@ export default function CadastroUsuario() {
 
     const router = useRouter();
 
-    setData('cadastro', {
-        nome: '',
-        nomeUsuario: '',
-        fotoPerfil: '',
-        genero: '',
-        email: '',
-        senha: ''
-    });
+    useEffect(() => {
+        setData('cadastro', {
+            nome: '',
+            nomeUsuario: '',
+            fotoPerfil: '',
+            genero: '',
+            email: '',
+            senha: ''
+        });
+    }, []);
 
     const handleFileChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         const file = event.target.files?.[0];
@@ -54,7 +56,7 @@ export default function CadastroUsuario() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
+
         updateData('cadastro', 'nome', nome);
         updateData('cadastro', 'nomeUsuario', nickname);
         updateData('cadastro', 'genero', genero);
@@ -79,15 +81,15 @@ export default function CadastroUsuario() {
                 <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <div className="flex flex-col items-center gap-4">
                         <img src={preview} alt="" className="w-30 h-30 bg-gray-300 rounded-full object-cover border-2 border-primary border-dashed" />
-                        <Input type="file" name="foto-de-perfil" id="img" onChange={handleFileChange} placeholder="Carregar foto" required/>
+                        <Input type="file" name="foto-de-perfil" id="img" onChange={handleFileChange} placeholder="Carregar foto" required />
                     </div>
                     <Label htmlFor="nome" className="font-semibold">
                         Nome Completo
-                        <Input id="nome" name="nome" placeholder="Alfredo Soares da Silva" onChange={handleNome} required/>
+                        <Input id="nome" name="nome" placeholder="Alfredo Soares da Silva" onChange={handleNome} required />
                     </Label>
                     <Label htmlFor="nickname" className="font-semibold">
                         Apelido
-                        <Input id="nickname" name="username" placeholder="alfredo_123" onChange={handleNickName} required/>
+                        <Input id="nickname" name="username" placeholder="alfredo_123" onChange={handleNickName} required />
                     </Label>
                     <Label className="font-semibold">
                         Sexo - Gênero
