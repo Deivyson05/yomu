@@ -10,9 +10,9 @@ import { Loading } from '@/components/loading'
 // Definindo o tipo para cada usuário
 interface User {
   id: number
-  name: string
-  avatar: string
-  points: number
+  nome_usuario: string
+  foto_perfil: string
+  xp: number
 }
 
 // Definindo o tipo para rankingsData
@@ -24,9 +24,6 @@ interface RankingsData {
 export default function Page() {
   const [mode, setMode] = useState<'weekly' | 'monthly'>('weekly')
   const [animating, setAnimating] = useState(false)
-
-  const data: User[] = (rankingsData as RankingsData)[mode]
-  const top3 = data.slice(0, 3)
 
 
   const { data: response, error, isLoading } = useSWR("ranking", getRanking);
@@ -99,7 +96,7 @@ export default function Page() {
             </div>
 
             <div className={styles.listCard}>
-              {response.ranking.map((u: any, idx: number) => (
+              {response.ranking.map((u: User, idx: number) => (
                 <div key={u.id} className={styles.listItem}>
                   <div className={styles.rankCircle}>{idx + 1}</div>
                   <img src={`${url}${u.foto_perfil}`} alt={u.name} className={styles.itemAvatar}
