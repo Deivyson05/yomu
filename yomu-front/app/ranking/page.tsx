@@ -99,7 +99,7 @@ export default function Page() {
               {response.ranking.map((u: User, idx: number) => (
                 <div key={u.id} className={styles.listItem}>
                   <div className={styles.rankCircle}>{idx + 1}</div>
-                  <img src={`${url}${u.foto_perfil}`} alt={u.name} className={styles.itemAvatar}
+                  <img src={`${url}${u.foto_perfil}`} alt={u.nome_usuario} className={styles.itemAvatar}
                     onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                       e.currentTarget.src = "https://i.pinimg.com/736x/2f/15/f2/2f15f2e8c688b3120d3d26467b06330c.jpg"
                     }}
