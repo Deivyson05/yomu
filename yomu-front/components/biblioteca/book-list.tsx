@@ -4,49 +4,40 @@ import { useState, useEffect, useRef } from "react";
 
 interface Book {
     id: number;
-    title: string;
-    cover: string;
+    titulo: string;
+    capa: string;
+    autor?: string;
 }
 
 interface BookCardProps {
     book: Book;
-    onDelete: (id: number) => void;
 }
 
 interface BookListProps {
     books: Book[];
-    onDeleteBook: (id: number) => void;
 }
 
-function BookCard({ book, onDelete }: BookCardProps) {
+function BookCard({ book}: BookCardProps) {
     return (
         <div className="relative group">
             <div className="flex flex-col items-center gap-2">
                 <p className="text-gray-800 text-sm font-semibold text-center px-1 min-h-[40px] flex items-center w-28 leading-tight">
-                    {book.title}
+                    {book.titulo}
                 </p>
                 
                 <div className="relative bg-gray-200 rounded-lg overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 group-active:scale-95 md:group-hover:-translate-y-1 w-28 h-40">
                     <img 
-                        src={book.cover} 
-                        alt={book.title}
+                        src={book.capa} 
+                        alt={book.titulo}
                         className="w-full h-full object-cover"
                     />
                 </div>
             </div>
-            
-            <button
-                onClick={() => onDelete(book.id)}
-                className="absolute top-0 right-0 bg-red-500 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-red-600 z-10 active:scale-90"
-                aria-label="Excluir livro"
-            >
-                <Trash2 size={16} />
-            </button>
         </div>
     );
 }
 
-export function BookList({ books, onDeleteBook }: BookListProps) {
+export function BookList({ books }: BookListProps) {
     const [shelves, setShelves] = useState<Book[][]>([]);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -76,7 +67,7 @@ export function BookList({ books, onDeleteBook }: BookListProps) {
                 <div key={shelfIndex} className="relative">
                     <div className="flex gap-4 items-end pb-4">
                         {shelf.map((book) => (
-                            <BookCard key={book.id} book={book} onDelete={onDeleteBook} />
+                            <BookCard key={book.id} book={book}/>
                         ))}
                     </div>
                     

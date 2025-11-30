@@ -1,4 +1,9 @@
-import { ArrowLeft, BookOpen, User, FileText, Hash, Calendar, CheckCircle } from "lucide-react";
+import { ArrowLeft, BookOpen, User, FileText, Hash, Calendar, CheckCircle, Pencil, Trash } from "lucide-react";
+import { AddBookModal, BookFormData } from "../biblioteca/add-book-modal";
+import { useState } from "react";
+import { deleteLivroId, putLivro } from "@/api/livros";
+import { useRouter } from "next/navigation";
+import { mutate } from "swr";
 
 // components/livro/book-details.tsx
 interface Book {
@@ -16,23 +21,32 @@ interface Book {
 
 interface BookDetailsProps {
     book: Book;
+    isLoaded: boolean
+    cacheId: string
+    isLoading: boolean
 }
 
-export function BookDetails({ book }: BookDetailsProps) {
+export function BookDetails({ book, isLoaded, cacheId, isLoading }: BookDetailsProps) {
+    const router = useRouter();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const getTipoRegistroLabel = (tipo: string) => {
         const tipos: Record<string, string> = {
-            'LEITURA': 'Leitura',
-            'RELEITURA': 'Releitura',
-            'ABANDONADO': 'Abandonado'
+            'PAGINAS': 'Páginas',
+            'CAPITULOS': 'Capítulos',
         };
         return tipos[tipo] || tipo;
     };
 
+     const handleEditBook = async (data: BookFormData) => {
+        const response = await putLivro(book.id, data);
+        mutate(`book-${cacheId}`);
+        console.log(response);
+    };
+
     const getTipoRegistroColor = (tipo: string) => {
         const cores: Record<string, string> = {
-            'LEITURA': 'bg-blue-100 text-blue-800',
-            'RELEITURA': 'bg-purple-100 text-purple-800',
-            'ABANDONADO': 'bg-red-100 text-red-800'
+            'PAGINAS': 'bg-blue-100 text-blue-800',
+            'CAPITULOS': 'bg-purple-100 text-purple-800',
         };
         return cores[tipo] || 'bg-gray-100 text-gray-800';
     };
@@ -111,12 +125,41 @@ export function BookDetails({ book }: BookDetailsProps) {
                         </div>
 
                         {/* Data de adição */}
-                        <div className="flex items-center gap-2 text-gray-500 text-sm pt-2">
-                            <Calendar size={16} />
-                            <span>Adicionado em {new Date(book.createdAt).toLocaleDateString('pt-BR')}</span>
+                        <div className="flex justify-between items-center">
+                            <div className="flex items-center gap-2 text-gray-500 text-sm pt-2">
+                                <Calendar size={16} />
+                                <span>Adicionado em {new Date(book.createdAt).toLocaleDateString('pt-BR')}</span>
+                            </div>
+                            <div className="flex gap-2">
+                                    <button className="bg-blue-400 text-white p-2 rounded-full"
+                                        onClick={() => setIsModalOpen(true)}
+                                    >
+                                        <Pencil size={24} />
+                                    </button>
+                                    <button className="bg-red-400 text-white p-2 rounded-full"
+                                        onClick={async ()=> {
+                                            await deleteLivroId(book.id);
+                                            alert('Livro excluido com sucesso');
+                                            router.push('/biblioteca');
+                                        }}
+                                    >
+                                        <Trash size={24} />
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    {
+                    isLoading == false ? (
+                        <AddBookModal
+                            isOpen={isModalOpen}
+                            onClose={() => setIsModalOpen(false)}
+                            onSubmit={handleEditBook}
+                            book={book}
+                        />
+                    ): ""
+                }
 
                 {/* Descrição */}
                 {book.descricao && (
