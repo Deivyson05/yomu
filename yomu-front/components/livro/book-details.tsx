@@ -50,7 +50,7 @@ export function BookDetails({ book, isLoaded }: BookDetailsProps) {
     return (
         <div className="bg-white min-h-screen pb-8">
             {/* Header com botão voltar */}
-            <div className="sticky top-0 bg-white border-b z-20 px-4 py-4 flex items-center gap-4">
+            <div className="sticky top-0 bg-white border-b z-20 py-4 flex items-center gap-4">
                 <button
                     onClick={() => window.history.back()}
                     className="p-2 hover:bg-gray-100 rounded-full transition-colors active:scale-95"
@@ -61,7 +61,7 @@ export function BookDetails({ book, isLoaded }: BookDetailsProps) {
                 <h1 className="text-xl font-bold text-gray-800 truncate">Detalhes do Livro</h1>
             </div>
 
-            <div className="p-6 max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto">
                 {/* Capa e Informações principais */}
                 <div className="flex flex-col md:flex-row gap-6 mb-8">
                     {/* Capa */}

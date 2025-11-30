@@ -8,7 +8,7 @@ interface ActionButtonsProps {
 export function ActionButtons({ onProgressClick, onTrilhaClick }: ActionButtonsProps) {
     return (
         <div className="pb-24 md:pb-8 mt-6">
-            <div className="max-w-4xl mx-auto px-6 flex flex-col gap-4">
+            <div className="max-w-4xl mx-auto flex flex-col gap-4">
                 {/* Botão R. Progresso */}
                 <button
                     onClick={onProgressClick}
