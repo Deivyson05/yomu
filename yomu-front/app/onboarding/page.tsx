@@ -10,29 +10,37 @@ import {
     CarouselApi
 } from "@/components/ui/carousel"
 
-
-
 export default function Onboarding() {
     const router = useRouter();
     const [step, setStep] = useState(0);
 
     const [api, setApi] = useState<CarouselApi | null>(null)
 
-    const onboarding = [
-        "Descubra novos livros e compartilhe suas leituras.",
-        "Tenha seus livros sempre à mão.",
-        "Ganhe pontos e suba no ranking dos leitores!"
-    ]
+    const onboardingData = [
+    {
+        text: "Descubra novos livros e compartilhe suas leituras.",
+        image: "/images/tela1.png",
+        color: "bg-[#598C58]"
+    },
+    {
+        text: "Tenha seus livros sempre à mão.",
+        image: "/images/tela2.png",
+        color: "bg-[#8E6456]"
+    },
+    {
+        text: "Ganhe pontos e suba no ranking dos leitores!",
+        image: "/images/tela3.png",
+        color: "bg-[#F7B047]"
+    }
+];
 
     const handleNext = () => {
         if (!api) return;
 
-        // Se NÃO for o último slide, avança
-        if (step < onboarding.length - 1) {
+        if (step < onboardingData.length - 1) {
             api.scrollNext();
-            setStep(step + 1); // Garante que o passo atualize
+            setStep(step + 1); 
         } else {
-            // Se for o último, navega para login
             router.push('/login');
         }
     }
@@ -67,8 +75,16 @@ export default function Onboarding() {
                 </CarouselContent>
             </Carousel>
             <section className='bg-white fixed flex flex-col w-screen p-8 bottom-0 z-10 gap-4 rounded-t-lg'>
+                <div className="flex justify-center gap-2 mb-4">
+                    {onboardingData.map((_, i) => (
+                        <div 
+                            key={i} 
+                            className={`h-2 rounded-full transition-all duration-300 ${i === step ? 'w-8 bg-[#2E1C15]' : 'w-2 bg-gray-300'}`} 
+                        />
+                    ))}
+                </div>
                 <p className='text-[#2E1C15] text-center text-xl font-bold'>
-                    {onboarding[step]}
+                    {onboardingData[step]?.text}
                 </p>
                 <button onClick={handleNext} className='p-2 bg-[#2E1C15] text-white rounded-full font-bold text-xl'>
                     Próximo
