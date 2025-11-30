@@ -3,6 +3,7 @@ import { postLivro } from "@/api/livros";
 import { on } from "events";
 import { X } from "lucide-react";
 import { useState } from "react";
+import { Book } from "../livro/book-details";
 
 export interface BookFormData {
     titulo: string;
@@ -34,7 +35,7 @@ export function AddBookModal({ isOpen, onClose, onSubmit, book }: AddBookModalPr
         finalizado: false
     });
 
-    const [errors, setErrors] = useState<any>({});
+    const [errors, setErrors] = useState<Partial<Record<keyof BookFormData, string>>>({});
 
     if (!isOpen) return null;
 
