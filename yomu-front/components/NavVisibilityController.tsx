@@ -8,7 +8,7 @@ export function NavVisibilityController() {
 
   // Esconde navbar em /cadastro e /login
   const hideNav =
-    pathname?.includes("cadastro") || pathname?.includes("login") || pathname?.includes("onboarding") || pathname?.includes("welcome");
+    pathname?.includes("cadastro") || pathname?.includes("login") || pathname?.includes("onboarding") || pathname?.includes("welcome") || pathname?.includes("");
 
   return !hideNav ? <MobileNavBar /> : null;
 }
