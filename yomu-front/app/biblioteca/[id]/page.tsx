@@ -37,7 +37,7 @@ export default function LivroPage() {
     };
 
     const handleTrilhaClick = () => {
-        console.log('Navegar para Trilha');
+        router.push('/trilha');
         // navigate('/livro/trilha')
     };
 
