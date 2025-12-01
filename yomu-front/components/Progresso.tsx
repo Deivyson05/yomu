@@ -4,8 +4,15 @@ import { getContinuarLeitura } from '@/api/livros'
 import { useRef } from 'react'
 import useSWR from 'swr'
 
+interface Prog {
+  id: number;
+  titulo: string;
+  autor: string;
+  progresso: number;
+}
+
 export function Progresso() {
-  const { data: progresso, error, isLoading } = useSWR('user-progresso', getContinuarLeitura);
+  const { data: progresso, error, isLoading } = useSWR<Prog[]>('user-progresso', getContinuarLeitura);
 
   const containerRef = useRef<HTMLDivElement>(null)
 
