@@ -61,7 +61,9 @@ export default function Login() {
                 <div className="font-semibold">
                     Ainda não tem conta? <a href="/cadastro/usuario" className="text-primary">Cadastre-se!</a>
                 </div>
-                <img src="/login.png" alt="login" />
+                <div className="flex justify-center">
+                    <img src="/login.png" alt="login" className="max-w-xs" />
+                </div>
             </section>
         </main>
     )

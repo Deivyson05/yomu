@@ -1,7 +1,12 @@
+'use client'
+
 import { useState } from 'react';
 import { ChevronRight, LogOut } from 'lucide-react';
+import { setSessionData } from '@/core/sStorage';
+import { useRouter } from 'next/navigation';
 
 export function LogoutButton() {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -14,6 +19,10 @@ export function LogoutButton() {
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => {
+        setSessionData('user', null);
+        router.push('/login');
+      }}
     >
       <div 
         className={`mr-4 flex h-10 w-10 items-center justify-center rounded-lg bg-red-600 text-white transition-all duration-300 ${

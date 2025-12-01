@@ -50,7 +50,7 @@ export default function Credenciais() {
     return (
         <main className="flex flex-col h-screen bg-[#598C58]">
             <header className="flex justify-between p-4 text-white">
-                <Link href="#" className="font-bold text-xl">Voltar</Link>
+                <Link href="#" onClick={()=> router.back()} className="font-bold text-xl">Voltar</Link>
                 <h2 className="font-semibold text-xl">Cadastro</h2>
             </header>
             <section className="flex flex-col p-8 justify-between flex-1 bg-gray-300 rounded-t-4xl fixed bottom-0 w-screen">
@@ -77,7 +77,7 @@ export default function Credenciais() {
                         Finalizar
                     </button>
                     <span className="font-semibold">
-                        Já tem conta? <Link href="#" className="text-primary">Realizar Login!</Link>
+                        Já tem conta? <Link href="/login" className="text-primary">Realizar Login!</Link>
                     </span>
                     <span className="text-red-200">
                         {erro}

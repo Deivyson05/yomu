@@ -7,6 +7,7 @@ import { Star, BookOpen, Users, Award, Settings } from "lucide-react";
 import { Statistics } from "@/components/statistics";
 import useSWR from "swr";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
   const { data: user, error, isLoading } = useSWR("usuario", getPerfil);
@@ -30,11 +31,11 @@ export default function Profile() {
       nome: "Ranking",
     }
   ];
-
+  const router = useRouter();
   return (
     <main className="min-h-screen bg-[#324C39] flex flex-col items-center text-white p-4">
       <header className="w-full flex justify-end pb-20">
-        <Settings />
+        <Settings onClick={() => router.push("/config")}/>
       </header>
       {/* Card principal */}
       <section className="bg-[#F5F7F4] text-[#324C39] w-full max-w-sm rounded-3xl shadow-md p-6 mt-4">
@@ -109,20 +110,6 @@ export default function Profile() {
             ))}
           </div>
         </div>
-
-        {/* Tarefas diárias
-        <div className="mt-6">
-          <h3 className="font-semibold mb-2">Tarefas Diárias</h3>
-          {badge.tarefas.map((tarefa) => (
-            <div
-              key={tarefa.id}
-              className="bg-[#324C39] text-white rounded-lg px-3 py-2 flex justify-between items-center"
-            >
-              <span>{tarefa.nome}</span>
-              <span className="text-sm opacity-80">{tarefa.tempo}</span>
-            </div>
-          ))}
-        </div> */}
       </section>
 
       {/* Barra inferior */}

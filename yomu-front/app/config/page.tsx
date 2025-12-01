@@ -7,9 +7,11 @@ import { ProfileSection } from '@/components/config/profileSection';
 import { MenuItemButton } from '@/components/config/menuItemButton';
 import { LogoutButton } from '@/components/config/logoutButton';
 import { MenuItem, NavItem } from '@/components/config/types';
+import { useRouter } from 'next/navigation';
 
 export default function ConfigScreen() {
   const [activeNav, setActiveNav] = useState('profile');
+
 
   const menuItems: MenuItem[] = [
     {
@@ -44,10 +46,12 @@ export default function ConfigScreen() {
     }
   ];
 
+  const router = useRouter();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#C4A69D] to-[#D4B5AA] font-sans">
-      <div className="w-full max-w-md overflow-hidden bg-white shadow-2xl">
-        <Header onBack={() => console.log('Voltar')} />
+    <div className="flex min-h-screen items-start justify-center font-sans">
+      <div className="w-full max-w-md overflow-hidden bg-white">
+        <Header onBack={() => router.back()} />
         <ProfileSection />
         
         <div className="py-2">

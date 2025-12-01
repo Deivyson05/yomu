@@ -68,7 +68,7 @@ export default function CadastroUsuario() {
     return (
         <main className="flex flex-col h-screen bg-[#598C58]">
             <header className="flex justify-between p-4 text-white">
-                <Link href="#" className="font-bold text-xl">Voltar</Link>
+                <Link href="#" onClick={()=> router.back()} className="font-bold text-xl">Voltar</Link>
                 <h2 className="font-semibold text-xl">Cadastro</h2>
             </header>
             <section className="flex flex-col p-8 gap-8 flex-1 bg-gray-300 rounded-t-4xl fixed bottom-0 w-screen">
@@ -99,7 +99,7 @@ export default function CadastroUsuario() {
                         Próxima Etapa
                     </button>
                     <span className="font-semibold">
-                        Ainda não tem conta? <Link href="#" className="text-primary">Cadastre-se!</Link>
+                        Já tem conta? <Link href="/login" className="text-primary">Realizar Login!</Link>
                     </span>
                 </form>
             </section>
