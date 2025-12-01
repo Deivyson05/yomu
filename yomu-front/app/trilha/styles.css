@@ -1,0 +1,245 @@
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  max-height: 850px;
+}
+
+.header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.book-icon {
+  font-size: 28px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #457144;
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  background: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  font-size: 18px;
+}
+
+.stat-number {
+  font-weight: 700;
+  color: #2c2c2c;
+  font-size: 15px;
+}
+
+.trail-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px 24px 60px;
+  position: relative;
+  background: white;
+}
+
+.trail-container::-webkit-scrollbar {
+  width: 0;
+}
+
+.trail-path {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding-bottom: 40px;
+}
+
+.trail-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: fit-content;
+}
+
+.trail-item:nth-child(7n+1) {
+  align-self: flex-end;
+  margin-right: 40px;
+}
+
+.trail-item:nth-child(7n+2) {
+  align-self: center;
+}
+
+.trail-item:nth-child(7n+3) {
+  align-self: flex-end;
+  margin-right: 40px;
+}
+
+.trail-item:nth-child(7n+4) {
+  align-self: center;
+}
+
+.trail-item:nth-child(7n+5) {
+  align-self: flex-start;
+  margin-left: 40px;
+}
+
+.trail-item:nth-child(7n+6) {
+  align-self: center;
+}
+
+.trail-item:nth-child(7n+7) {
+  align-self: center;
+}
+
+.trail-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.trail-icon:hover {
+  transform: scale(1.15);
+  background-color: #4b5563;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.trail-icon:active {
+  transform: scale(1.05);
+}
+
+.trail-icon.active {
+  background-color: #457144;
+  animation: pulse 2s infinite;
+}
+
+.trail-icon.green {
+  background-color: #457144;
+}
+
+.trail-icon.green:hover {
+  background-color: #568955;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(69, 113, 68, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(69, 113, 68, 0);
+  }
+}
+
+.footer-nav {
+  border-top: 1px solid #e5e5e5;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #f8f8f8;
+  flex-shrink: 0;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  gap: 4px;
+}
+
+.nav-button:hover {
+  transform: scale(1.1);
+  color: #6b7280;
+}
+
+.nav-button:active {
+  transform: scale(1.05);
+}
+
+.nav-button.active {
+  color: #4b5563;
+}
+
+.nav-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.nav-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: inherit;
+}
+
+@media (max-width: 480px) {
+  .card {
+    max-width: 100%;
+    border-radius: 0;
+    height: 100vh;
+    max-height: 100vh;
+  }
+
+  .trail-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 32px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+  
+  .book-icon {
+    font-size: 24px;
+  }
+}

@@ -44,6 +44,7 @@ export default function Login() {
 
                 <Button variant={"default"}
                     onClick={async () => {
+                        console.log('Entrar');
                         try {
                             await postLogin({
                                 email,

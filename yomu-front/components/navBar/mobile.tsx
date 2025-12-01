@@ -24,7 +24,7 @@ export function MobileNavBar() {
   ];
 
   return (
-    <nav className="fixed bottom-0 flex w-screen justify-between border-t-2 bg-white px-8 py-4">
+    <nav className="fixed bottom-0 flex w-screen justify-between border-t-2 bg-white px-8 py-4 z-10">
       {navItems.map((item) => {
         const Icon = item.icon;
         const isActive = activePath === item.href;
