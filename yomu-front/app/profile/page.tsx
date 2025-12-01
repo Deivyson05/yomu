@@ -1,59 +1,35 @@
 'use client'
 import { useState, useEffect } from "react";
-import { getPerfil, url } from "@/api/api";
+import { getPerfil, getQuantAmigos, getRankingUsuario, url } from "@/api/api";
 import { getSessionData } from "@/core/sStorage";
 import { Progress } from "@/components/ui/progress";
 import { Star, BookOpen, Users, Award, Settings } from "lucide-react";
 import { Statistics } from "@/components/statistics";
+import useSWR from "swr";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Profile() {
-  const [perfil, setPerfil] = useState({
-    nome: 'Filomena123',
-    xpAtual: 300,
-    xpTotal: 800,
-    level: 14,
-    rank: 239,
-    seguidores: 57,
-    fotoPerfil: "/images/perfil.png",
-    badges: [
-      { id: 1, nome: "Badge 1", img: "/images/badge1.png" },
-      { id: 2, nome: "Badge 2", img: "/images/badge2.png" },
-      { id: 3, nome: "Badge 3", img: "/images/badge3.png" },
-      { id: 4, nome: "Badge 4", img: "/images/badge4.png" },
-    ],
-    tarefas: [
-      { id: 1, nome: "Leia 20 páginas", tempo: "20min", concluida: false },
-    ],
-  });
+  const { data: user, error, isLoading } = useSWR("usuario", getPerfil);
+  const { data: quantAmigos, error: errorAmigos, isLoading: isLoadingAmigos } = useSWR("quantAmigos", getQuantAmigos);
+  const { data: rankingUser, error: errorRanking, isLoading: isLoadingRanking } = useSWR("rankingUser", getRankingUsuario);
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const response = await getPerfil();
-        setPerfil({
-          nome: response.nomeUsuario,
-          xpAtual: response.xpTotal,
-          xpTotal: 800,
-          level: response.nivelAtual,
-          rank: 239,
-          seguidores: 57,
-          fotoPerfil: `${url}${response.fotoPerfil}`,
-          badges: [
-            { id: 1, nome: "Badge 1", img: "/images/badge1.png" },
-            { id: 2, nome: "Badge 2", img: "/images/badge2.png" },
-            { id: 3, nome: "Badge 3", img: "/images/badge3.png" },
-            { id: 4, nome: "Badge 4", img: "/images/badge4.png" },
-          ],
-          tarefas: [
-            { id: 1, nome: "Leia 20 páginas", tempo: "20min", concluida: false },
-          ],
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getUser();
-  }, []);
+  const badges = [
+    {
+      id: 1,
+      img: "/images/badge1.png",
+      nome: "Livros lidos",
+    },
+    {
+      id: 2,
+      img: "/images/badge2.png",
+      nome: "Amigos",
+    },
+    {
+      id: 3,
+      img: "/images/badge3.png",
+      nome: "Ranking",
+    }
+  ];
 
   return (
     <main className="min-h-screen bg-[#324C39] flex flex-col items-center text-white p-4">
@@ -64,35 +40,66 @@ export default function Profile() {
       <section className="bg-[#F5F7F4] text-[#324C39] w-full max-w-sm rounded-3xl shadow-md p-6 mt-4">
         {/* Cabeçalho com avatar */}
         <div className="flex flex-col items-center -mt-20">
-          <img
-            src={perfil.fotoPerfil}
-            alt="Foto de perfil"
-            className="w-24 h-24 rounded-full object-cover border-4 border-[#324C39] bg-[#324C39] shadow-md"
-          />
-          <h2 className="mt-3 text-lg font-semibold">{perfil.nome}</h2>
+          {
+            isLoading ? (
+              <>
+                <Skeleton className="w-24 h-24 rounded-full object-cover border-4 border-[#324C39] shadow-md" />
+
+                <Skeleton className="mt-3 h-4 w-20" />
+              </>
+            ) : (
+              <>
+                <img
+                  src={user.fotoPerfil}
+                  alt="Foto de perfil"
+                  className="w-24 h-24 rounded-full object-cover border-4 border-[#324C39] bg-[#324C39] shadow-md"
+                />
+
+                <h2 className="mt-3 text-lg font-semibold">{user.nomeUsuario}</h2>
+              </>
+            )
+          }
+
         </div>
 
         {/* Barra de progresso */}
-        <div className="mt-4">
-          <Progress value={(perfil.xpAtual / perfil.xpTotal) * 100} />
-          <p className="text-center text-sm mt-1">
-            {perfil.xpAtual} / {perfil.xpTotal} XP
-          </p>
-        </div>
+        {
+          isLoading ? (
+            <div className="mt-4">
+              <Progress value={0} />
+              <Skeleton className="mt-3 h-4 w-20" />
+            </div>
+          ) : (
+            <div className="mt-4">
+              <Progress value={(user.xpTotal / 200) * 100} />
+              <p className="text-center text-sm mt-1">
+                {user.xpTotal} / 200 XP
+              </p>
+            </div>
+          )
+        }
 
         {/* Estatísticas */}
 
-        <Statistics
-          rank={perfil.rank}
-          level={perfil.level}
-          seguidores={perfil.seguidores}
-        />
+        {
+          isLoading || isLoadingAmigos || isLoadingRanking ? (
+            <div className="mt-4">
+              <Skeleton className="mt-3 h-4 w-20" />
+            </div>
+          ) : (
+            <Statistics
+              rank={rankingUser}
+              level={user.nivelAtual}
+              seguidores={quantAmigos}
+            />
+          )
+        }
 
         {/* Badges */}
         <div className="mt-6">
           <h3 className="font-semibold mb-2">Badges</h3>
           <div className="grid grid-cols-4 gap-3 justify-items-center">
-            {perfil.badges.map((badge) => (
+            {badges.map((badge) => (
               <img
                 key={badge.id}
                 src={badge.img}
@@ -103,10 +110,10 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Tarefas diárias */}
+        {/* Tarefas diárias
         <div className="mt-6">
           <h3 className="font-semibold mb-2">Tarefas Diárias</h3>
-          {perfil.tarefas.map((tarefa) => (
+          {badge.tarefas.map((tarefa) => (
             <div
               key={tarefa.id}
               className="bg-[#324C39] text-white rounded-lg px-3 py-2 flex justify-between items-center"
@@ -115,7 +122,7 @@ export default function Profile() {
               <span className="text-sm opacity-80">{tarefa.tempo}</span>
             </div>
           ))}
-        </div>
+        </div> */}
       </section>
 
       {/* Barra inferior */}

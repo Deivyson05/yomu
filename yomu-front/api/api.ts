@@ -40,3 +40,23 @@ export const getPerfil = async () => {
         throw error;
     }
 }
+
+export const getQuantAmigos = async () => {
+    try {
+        const response = await api.get(`/api/amizades/usuario/${getSessionData('user').id}/amigos`)
+        return response.data.length;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+export const getRankingUsuario = async () => {
+    try {
+        const response = await api.get(`/api/rankings/geral/SEMANAL`);
+        return response.data.ranking.filter((rank: any) => rank.usuario_id === getSessionData('user').id)[0].posicao;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}

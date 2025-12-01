@@ -25,13 +25,13 @@ export function Statistics({ level, rank, seguidores }: Props) {
             <div className={styles.separator}></div>
             <div className={`${styles.div}`}>
                 <Crown/>
-                <span className={styles.span}>Rank Regional</span>
+                <span className={styles.span}>Rank Semanal</span>
                 <strong>#{rank}</strong>
             </div>
             <div className={styles.separator}></div>
             <div className={`${styles.div}`}>
                 <UserStar/>
-                <span className={styles.span}>Seguidores</span>
+                <span className={styles.span}>Amigos</span>
                 <strong>{seguidores}</strong>
             </div>
         </article>
