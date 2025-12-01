@@ -1,11 +1,10 @@
 import { TrendingUp, Route } from "lucide-react";
 
 interface ActionButtonsProps {
-    onProgressClick: () => void;
     onTrilhaClick: () => void;
 }
 
-export function ActionButtons({ onProgressClick, onTrilhaClick }: ActionButtonsProps) {
+export function ActionButtons({ onTrilhaClick }: ActionButtonsProps) {
     return (
         <div className="pb-24 md:pb-8 mt-6">
             <div className="max-w-4xl mx-auto flex flex-col gap-4">
