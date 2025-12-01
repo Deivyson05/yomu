@@ -52,7 +52,7 @@ export function Progresso() {
             className="flex gap-3 sm:gap-4 overflow-x-auto cursor-pointer select-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             style={{ userSelect: 'none' }}
           >
-            {progresso.map((book: any, index: number) => (
+            {progresso?.map((book: any, index: number) => (
               <div
                 key={index}
                 className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-sm min-w-40 sm:min-w-48 md:min-w-56 flex-shrink-0"
