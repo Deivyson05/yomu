@@ -174,7 +174,6 @@ export default function LivroPage() {
 
 
                             <ActionButtons
-                                onProgressClick={handleProgressClick}
                                 onTrilhaClick={handleTrilhaClick}
                             />
                         </>
