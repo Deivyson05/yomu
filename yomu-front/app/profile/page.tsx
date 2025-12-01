@@ -51,7 +51,7 @@ export default function Profile() {
             ) : (
               <>
                 <img
-                  src={user.fotoPerfil}
+                  src={`${url}${user.fotoPerfil}`}
                   alt="Foto de perfil"
                   className="w-24 h-24 rounded-full object-cover border-4 border-[#324C39] bg-[#324C39] shadow-md"
                 />
