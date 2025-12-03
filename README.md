@@ -6,7 +6,7 @@ Ingrid Beatriz,
 Deivyson,
 Iwerson Guilherme,
 Vinicius,
-João,
+João Ferreira,
 Arthur,
 Andre,
 Heitor
