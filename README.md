@@ -7,8 +7,8 @@ Deivyson,
 Iwerson Guilherme,
 Vinicius,
 João Ferreira,
-Arthur,
-Andre,
-Heitor
+Artur Francisco,
+André Luís,
+José Heitor
 
 Obs(O projeo esta dividio em branchs)
