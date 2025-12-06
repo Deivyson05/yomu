@@ -8,7 +8,7 @@ Repositório dedicado ao Projeto Integrador 3 da Universidade Católica de Perna
 - Deivyson Ricardo Silva dos Santos,
 - Iwerson Guilherme da Silva Souza,
 - Vinicius de Almeida Silva,
-- João Ferreira,
+- João Vitor Ferreira da Silva,
 - Artur Francisco Damascena,
 - André Luís Gomes da Silva Filho,
 - José Heitor Felix Guimarães
