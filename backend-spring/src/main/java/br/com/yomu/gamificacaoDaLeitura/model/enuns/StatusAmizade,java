@@ -1,0 +1,8 @@
+package com.yomu.enums;
+
+public enum StatusAmizade {
+    PENDENTE,
+    ACEITA,
+    RECUSADA,
+    BLOQUEADA
+}
